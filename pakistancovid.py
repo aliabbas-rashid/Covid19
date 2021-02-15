@@ -16,7 +16,7 @@ def main():
     """)
 
     #Image
-    image = Image.open('C:/Users/aliab/PycharmProjects/Covid/5000.jpg')
+    image = Image.open('C:/Users/aliab/PycharmProjects/Covid19/5000.jpg')
     st.image(image, caption='PAKISTAN FLAG', use_column_width=True)
 
     #Data
