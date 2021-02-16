@@ -1,6 +1,5 @@
 import mysql.connector
 mydb = mysql.connector.connect(host="localhost", user="root", passwd="finalyear123", database="fypdb")
-
 mycursor = mydb.cursor()
 
 select_smt = "SELECT * FROM uk_deaths_within_28_days_of_positive_test_by_date"

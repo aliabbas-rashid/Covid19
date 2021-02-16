@@ -16,8 +16,8 @@ def main():
     """)
 
     #Image
-    image = Image.open('C:/Users/aliab/PycharmProjects/Covid19/5000.jpg')
-    st.image(image, caption='PAKISTAN FLAG', use_column_width=True)
+    image = Image.open('C:/Users/aliab/PycharmProjects/Covid19/pictures/9000.jpg')
+    st.image(image, caption='PAKISTAN COVID', use_column_width=True)
 
     #Data
     data = fypconnect.myresult_pakistan_profile

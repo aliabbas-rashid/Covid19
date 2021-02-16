@@ -16,8 +16,8 @@ def main():
     """)
 
     #Image
-    image = Image.open('C:/Users/aliab/PycharmProjects/Covid19/2000.png')
-    st.image(image, caption='TEMP', use_column_width=True)
+    image = Image.open('C:/Users/aliab/PycharmProjects/Covid19/pictures/2000.jpg')
+    st.image(image, caption='UK TEMP', use_column_width=True)
 
     #Data
     data = fypconnect.myresult_eng_mean_temp

@@ -16,7 +16,7 @@ def main():
     """)
 
     #Image
-    image = Image.open('C:/Users/aliab/PycharmProjects/Covid19/1000.jpg')
+    image = Image.open('C:/Users/aliab/PycharmProjects/Covid19/pictures/1000.jpg')
     st.image(image, caption='GVA', use_column_width=True)
 
     #Data

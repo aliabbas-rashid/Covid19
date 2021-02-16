@@ -20,8 +20,8 @@ def main():
     """)
     left_column, right_column = st.beta_columns(2)
     #Image
-    image = Image.open('C:/Users/aliab/PycharmProjects/Covid19/6000.jpg')
-    st.image(image, caption='COVID19', use_column_width=True)
+    image = Image.open('C:/Users/aliab/PycharmProjects/Covid19/pictures/6000.jpg')
+    st.image(image, caption='UK COVID19', use_column_width=True)
 
     #Get the data
     data = fypconnect.myresult_uk_death[::-1]

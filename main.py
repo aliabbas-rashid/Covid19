@@ -13,7 +13,7 @@ def main():
 def menu_login():
 
     # Image
-    image = Image.open('C:/Users/aliab/PycharmProjects/Covid19/3000.png')
+    image = Image.open('C:/Users/aliab/PycharmProjects/Covid19/pictures/3000.png')
     st.image(image, caption='', use_column_width=True)
 
     st.markdown("<h1 style='text-align: center; color: black;'>COVID 19: Ramifications on the climate and environment and how these have impacted the economy in various countries</h1>", unsafe_allow_html=True)
