@@ -42,3 +42,8 @@ select_smt_3 = "SELECT * FROM uk_gdp"
 mycursor.execute(select_smt_3)
 
 myresult_uk_gdp = mycursor.fetchall()
+
+select_smt_4 = "SELECT * FROM eng_mean_temp"
+mycursor.execute(select_smt_4)
+
+myresult_eng_mean_temp = mycursor.fetchall()
