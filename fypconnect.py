@@ -2,52 +2,32 @@ import mysql.connector
 mydb = mysql.connector.connect(host="localhost", user="root", passwd="finalyear123", database="fypdb")
 mycursor = mydb.cursor()
 
+#UK DEATHS
 select_smt = "SELECT * FROM uk_deaths_within_28_days_of_positive_test_by_date"
 mycursor.execute(select_smt)
-
 myresult_uk_death = mycursor.fetchall()
+field_names_uk_death= [i[0] for i in mycursor.description]
 
-select_smt = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'uk_deaths_within_28_days_of_positive_test_by_date'"
-mycursor.execute(select_smt)
-myresult_uk_death_columns = mycursor.fetchall()
-#print(myresult_uk_death)
-#for row in myresult_uk_death:
- #   print(row)
-
-rows = (myresult_uk_death_columns[3])
-tuple(rows)
-print(rows)
-
-result = []
-for i in range(0, len(rows)):
-    result.append(rows[i])
-
-for i in range(0, len(myresult_uk_death)):
-    result.append(myresult_uk_death[i])
-
-for row in result:
-    print(row)
-
-#myresult_uk_death.insert(0, rows)
-
-#print(myresult_uk_death)
-
+#Pakistan Profile
 select_smt_2 = "SELECT * FROM pakistan_covid_profile"
 mycursor.execute(select_smt_2)
-
 myresult_pakistan_profile = mycursor.fetchall()
+field_names_pakistan_profile = [i[0] for i in mycursor.description]
 
+#UK GDP
 select_smt_3 = "SELECT * FROM uk_gdp"
 mycursor.execute(select_smt_3)
-
 myresult_uk_gdp = mycursor.fetchall()
+field_names_uk_gdp = [i[0] for i in mycursor.description]
 
+#UK MEAN TEMP
 select_smt_4 = "SELECT * FROM eng_mean_temp"
 mycursor.execute(select_smt_4)
-
 myresult_eng_mean_temp = mycursor.fetchall()
+field_names_eng_mean_temp = [i[0] for i in mycursor.description]
 
+#UK UK GVA
 select_smt_5 = "SELECT * FROM uk_gross_value_added_avg"
 mycursor.execute(select_smt_5)
-
 myresult_uk_gva = mycursor.fetchall()
+field_names_uk_gva = [i[0] for i in mycursor.description]
