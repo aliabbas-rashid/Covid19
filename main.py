@@ -2,6 +2,7 @@ import ukcovidstats
 import ukgdp
 import pakistancovid
 import engmeantemp
+import ukgvaavg
 import streamlit as st
 from PIL import Image
 
@@ -22,10 +23,10 @@ def menu_login():
 
     if choice == "Home":
         st.subheader("Home")
-        st.write("Welcome to my final year project web applicatoin! Please select login from the left hand side (menu) and enter a valid login. Tick the login box once you're ready.")
+        st.write("Welcome to my final year project web application! Please select login from the left hand side (menu) and enter a valid login. Tick the login box once you're ready.")
     elif choice == "Login":
         st.subheader("Login")
-        st.write("Welcome to my final year project web applicatoin! Please select login from the left hand side (menu) and enter a valid login. Tick the login box once you're ready.")
+        st.write("Welcome to my final year project web application! Please select login from the left hand side (menu) and enter a valid login. Tick the login box once you're ready.")
         username = st.sidebar.text_input("Username: ")
         password = st.sidebar.text_input("Password: ", type='password')
 
@@ -33,11 +34,13 @@ def menu_login():
             if username == "admin" and password == "admin123":
                 st.success(f"Logged in as {username}")
 
-                task = st.selectbox("Options", ["UK Covid statistics", "UK GDP", "England Mean Temp", "Pakistan Covid Profile"])
+                task = st.selectbox("Options", ["UK Covid statistics", "UK GDP", "UK Gross Value Added", "England Mean Temp", "Pakistan Covid Profile"])
                 if task == "UK Covid statistics":
                     ukcovidstats.main()
                 if task == "UK GDP":
                     ukgdp.main()
+                if task == "UK Gross Value Added":
+                    ukgvaavg.main()
                 if task == "England Mean Temp":
                     engmeantemp.main()
                 if task == "Pakistan Covid Profile":

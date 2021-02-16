@@ -11,19 +11,19 @@ import streamlit as st
 def main():
     #title
     st.write("""
-    # England Mean Temperature
-    Graphs containing statistics of the mean temperature around England
+    # UK Gross Value Added (average)
+    Graphs containing statistics of the UK's GVA (average)
     """)
 
     #Image
-    image = Image.open('C:/Users/aliab/PycharmProjects/Covid19/2000.png')
-    st.image(image, caption='TEMP', use_column_width=True)
+    image = Image.open('C:/Users/aliab/PycharmProjects/Covid19/1000.jpg')
+    st.image(image, caption='GVA', use_column_width=True)
 
     #Data
-    data = fypconnect.myresult_eng_mean_temp
+    data = fypconnect.myresult_uk_gva
 
     #Set a subheader
-    st.subheader('England Mean Temperature: ')
+    st.subheader('England Gross Value Added: ')
 
     #Show data as a table
     st.dataframe(data)
@@ -32,10 +32,10 @@ def main():
     #st.write(data.describe())
 
     #Show data as a chart
-    chart = st.bar_chart(data)
+    chart = st.line_chart(data)
 
     #Store user input into variable
-    user_input = getinput.get_user_input_eng_mean_temp()
+    user_input = getinput.get_user_input_uk_gva()
 
     #Set a subheader
     st.subheader('User input:')

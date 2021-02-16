@@ -47,3 +47,8 @@ select_smt_4 = "SELECT * FROM eng_mean_temp"
 mycursor.execute(select_smt_4)
 
 myresult_eng_mean_temp = mycursor.fetchall()
+
+select_smt_5 = "SELECT * FROM uk_gross_value_added_avg"
+mycursor.execute(select_smt_5)
+
+myresult_uk_gva = mycursor.fetchall()
