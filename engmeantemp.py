@@ -21,12 +21,13 @@ def main():
 
     #Data
     data = fypconnect.myresult_eng_mean_temp
+    column_names = fypconnect.field_names_eng_mean_temp
 
     #Set a subheader
     st.subheader('England Mean Temperature: ')
 
     #Show data as a table
-    st.dataframe(data)
+    st.dataframe(pd.DataFrame(data, columns=column_names))
 
     #Show statistics
     #st.write(data.describe())

@@ -102,3 +102,6 @@ def get_user_input_uk_gva():
     features = pd.DataFrame(user_data, index=[0])
     #st.dataframe(features.applymap(f'color: {color}'))
     return features
+
+#MERGE TUPLES
+def merge_tuples(*t): return tuple(j for i in (t) for j in (i if isinstance(i, tuple) else (i,)))

@@ -21,12 +21,13 @@ def main():
 
     #Data
     data = fypconnect.myresult_uk_gva
+    column_names = fypconnect.field_names_uk_gva
 
     #Set a subheader
     st.subheader('England Gross Value Added: ')
 
     #Show data as a table
-    st.dataframe(data)
+    st.dataframe(pd.DataFrame(data, columns=column_names))
 
     #Show statistics
     #st.write(data.describe())

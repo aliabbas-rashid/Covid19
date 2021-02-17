@@ -25,11 +25,12 @@ def main():
 
     #Get the data
     data = fypconnect.myresult_uk_death[::-1]
+    column_names = fypconnect.field_names_uk_death
     #Set a subheader
     st.subheader('Uk deaths by date:')
 
     #Show data as a table
-    st.dataframe(data)
+    st.dataframe(pd.DataFrame(data, columns=column_names))
 
     #Show statistics
     #st.write(data.describe())

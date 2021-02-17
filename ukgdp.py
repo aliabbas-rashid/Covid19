@@ -21,12 +21,13 @@ def main():
 
     #Data
     data = fypconnect.myresult_uk_gdp
+    column_names = fypconnect.field_names_uk_gdp
 
     #Set a subheader
     st.subheader('UK GDP:')
 
     #Show data as a table
-    st.dataframe(data)
+    st.dataframe(pd.DataFrame(data, columns=column_names))
 
     #Show statistics
     #st.write(data.describe())

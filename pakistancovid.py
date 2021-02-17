@@ -21,12 +21,13 @@ def main():
 
     #Data
     data = fypconnect.myresult_pakistan_profile
+    column_names = fypconnect.field_names_pakistan_profile
 
     #Set a subheader
     st.subheader('Pakistan Covid Profile:')
 
     #Show data as a table
-    st.dataframe(data)
+    st.dataframe(pd.DataFrame(data, columns=column_names))
 
     #Show statistics
     #st.write(data.describe())

@@ -1,5 +1,10 @@
 import mysql.connector
-mydb = mysql.connector.connect(host="localhost", user="root", passwd="finalyear123", database="fypdb")
+
+try:
+    mydb = mysql.connector.connect(host="localhost", user="root", passwd="finalyear123", database="fypdb")
+except mysql.Error as e:
+    print(f"Exception raised: {e}")
+
 mycursor = mydb.cursor()
 
 #UK DEATHS
