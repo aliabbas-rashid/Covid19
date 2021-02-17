@@ -26,11 +26,14 @@ def main():
     #Set a subheader
     st.subheader('England Mean Temperature: ')
 
+    #Create data frame
+    df = pd.DataFrame(data, columns=column_names)
+
     #Show data as a table
-    st.dataframe(pd.DataFrame(data, columns=column_names))
+    st.dataframe(df)
 
     #Show statistics
-    #st.write(data.describe())
+    st.write(df.describe())
 
     #Show data as a chart
     chart = st.bar_chart(data)
