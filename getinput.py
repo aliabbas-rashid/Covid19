@@ -44,9 +44,9 @@ def get_user_input_uk_covid_deaths():
     return features
 
 #Get feature input from user
-def get_user_input_uk_gdp():
-    date_input_start = st.sidebar.slider('UK GDP- Start Date:', datetime.date(2020, 1, 1), datetime.date(2021, 1, 24), datetime.date(2020, 4, 8))
-    date_input_end = st.sidebar.slider('UK GDP- End Date:', datetime.date(2020, 1, 1), datetime.date(2021, 1, 24), datetime.date(2020, 4, 8))
+def get_user_input_uk_gdp(start, end):
+    date_input_start = st.sidebar.slider('UK GDP- Start Date:', start, end)
+    date_input_end = st.sidebar.slider('UK GDP- End Date:', start, end)
 
     #Store a dictionary into a variable
     user_data = {'UK GDP- Start Date:':date_input_start,

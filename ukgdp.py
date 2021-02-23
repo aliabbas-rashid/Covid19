@@ -1,6 +1,7 @@
 import fypconnect
 import getinput
 import datetime
+from datetime import datetime
 import pandas as pd
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
@@ -39,7 +40,11 @@ def main():
     chart = st.line_chart(data)
 
     #Store user input into variable
-    user_input = getinput.get_user_input_uk_gdp()
+    temp_start = fypconnect.uk_gdp_date_start[1]
+    temp_end = fypconnect.uk_gdp_date_end[1]
+    start_date_obj = datetime.strptime(temp_start, '%Y-%m-%d')
+    end_date_obj = datetime.strptime(temp_end, '%Y-%m-%d')
+    user_input = getinput.get_user_input_uk_gdp(start_date_obj, end_date_obj)
 
     #Set a subheader
     st.subheader('User input:')

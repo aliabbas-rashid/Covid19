@@ -24,6 +24,15 @@ select_smt_3 = "SELECT * FROM uk_gdp"
 mycursor.execute(select_smt_3)
 myresult_uk_gdp = mycursor.fetchall()
 field_names_uk_gdp = [i[0] for i in mycursor.description]
+select_start_date_3 = "SELECT * FROM uk_gdp WHERE id=1"
+mycursor.execute(select_start_date_3)
+myresult_uk_gdp_start_date = mycursor.fetchall()
+print(myresult_uk_gdp_start_date)
+select_end_date_3 = "SELECT * FROM uk_gdp WHERE id=165"
+mycursor.execute(select_end_date_3)
+myresult_uk_gdp_end_date = mycursor.fetchall()
+uk_gdp_date_start = myresult_uk_gdp_start_date[0]
+uk_gdp_date_end = myresult_uk_gdp_end_date[0]
 
 #UK MEAN TEMP
 select_smt_4 = "SELECT * FROM eng_mean_temp"
