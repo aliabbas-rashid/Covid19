@@ -6,7 +6,6 @@ import ukgvaavg
 import checkpw
 import streamlit as st
 from PIL import Image
-from base64 import b64encode
 
 def main():
 
