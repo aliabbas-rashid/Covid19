@@ -3,8 +3,10 @@ import ukgdp
 import pakistancovid
 import engmeantemp
 import ukgvaavg
+import checkpw
 import streamlit as st
 from PIL import Image
+from base64 import b64encode
 
 def main():
 
@@ -31,7 +33,7 @@ def menu_login():
         password = st.sidebar.text_input("Password: ", type='password')
 
         if st.sidebar.checkbox("Login"):
-            if username == "admin" and password == "admin123":
+            if username == "admin" and checkpw.checkpass(password):
                 st.success(f"Logged in as {username}")
 
                 task = st.selectbox("Options", ["UK Covid statistics", "UK GDP", "UK Gross Value Added", "England Mean Temp", "Pakistan Covid Profile"])
