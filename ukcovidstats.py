@@ -1,6 +1,7 @@
 import fypconnect
 import getinput
 import datetime
+from datetime import datetime
 import pandas as pd
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
@@ -48,7 +49,9 @@ def main():
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25, random_state=0)
 
     #Store user input into variable
-    user_input = getinput.get_user_input_uk_covid_deaths()
+    temp_start = fypconnect.uk_death_date_start[4]
+    temp_end = fypconnect.uk_death_date_end[4]
+    user_input = getinput.get_user_input_uk_covid_deaths(temp_start, temp_end)
 
     #Set a subheader
     st.subheader('User input:')

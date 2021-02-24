@@ -1,6 +1,7 @@
 import fypconnect
 import getinput
 import datetime
+from datetime import datetime
 import pandas as pd
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
@@ -39,6 +40,8 @@ def main():
     chart = st.bar_chart(data)
 
     #Store user input into variable
+    temp_start = fypconnect.eng_mean_temp_date_start[1]
+    temp_end = fypconnect.eng_mean_temp_date_end[1]
     user_input = getinput.get_user_input_eng_mean_temp()
 
     #Set a subheader

@@ -12,10 +12,10 @@ select_smt = "SELECT * FROM uk_deaths_within_28_days_of_positive_test_by_date"
 mycursor.execute(select_smt)
 myresult_uk_death = mycursor.fetchall()
 field_names_uk_death= [i[0] for i in mycursor.description]
-select_start_date_1 = "SELECT * FROM uk_deaths_within_28_days_of_positive_test_by_date WHERE id=1"
+select_start_date_1 = "SELECT * FROM uk_deaths_within_28_days_of_positive_test_by_date WHERE id=331"
 mycursor.execute(select_start_date_1)
 myresult_uk_death_start_date = mycursor.fetchall()
-select_end_date_1 = "SELECT * FROM uk_deaths_within_28_days_of_positive_test_by_date WHERE id=137"
+select_end_date_1 = "SELECT * FROM uk_deaths_within_28_days_of_positive_test_by_date WHERE id=1"
 mycursor.execute(select_end_date_1)
 myresult_uk_death_end_date = mycursor.fetchall()
 uk_death_date_start = myresult_uk_death_start_date[0]

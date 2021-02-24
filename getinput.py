@@ -1,11 +1,13 @@
 import streamlit as st
 import datetime
+import time
 import pandas as pd
 
 #Get feature input from user for pakistan covid profile
-def get_user_input_pakistan():
-    date_input_start = st.sidebar.slider('Pakistan- Start Date:', datetime.date(2020, 1, 1), datetime.date(2021, 1, 24), datetime.date(2020, 4, 8))
-    date_input_end = st.sidebar.slider('Pakistan- End Date:', datetime.date(2020, 1, 1), datetime.date(2021, 1, 24), datetime.date(2020, 4, 8))
+def get_user_input_pakistan(start, end):
+    midpoint = start + (end - start) / 2
+    date_input_start = st.sidebar.slider('Pakistan- Start Date:', start, end, midpoint)
+    date_input_end = st.sidebar.slider('Pakistan- End Date:', start, end, midpoint)
 
     #Store a dictionary into a variable
     user_data = {'Pakistan- Start Date:':date_input_start,
@@ -24,9 +26,11 @@ def get_user_input_pakistan():
 
 
 #Get feature input from user for uk covid deaths
-def get_user_input_uk_covid_deaths():
-    date_input_start = st.sidebar.slider('UK Deaths- Start Date:', datetime.date(2020, 1, 1), datetime.date(2021, 1, 24), datetime.date(2020, 4, 8))
-    date_input_end = st.sidebar.slider('UK Deaths- End Date:', datetime.date(2020, 1, 1), datetime.date(2021, 1, 24), datetime.date(2020, 4, 8))
+def get_user_input_uk_covid_deaths(start, end):
+    midpoint = start + (end - start) / 2
+    st.write(end)
+    date_input_start = st.sidebar.slider('UK Deaths- Start Date:', start, end, midpoint)
+    date_input_end = st.sidebar.slider('UK Deaths- End Date:', start, end, midpoint)
 
     #Store a dictionary into a variable
     user_data = {'UK Deaths- Start Date:':date_input_start,
@@ -45,8 +49,9 @@ def get_user_input_uk_covid_deaths():
 
 #Get feature input from user
 def get_user_input_uk_gdp(start, end):
-    date_input_start = st.sidebar.slider('UK GDP- Start Date:', start, end)
-    date_input_end = st.sidebar.slider('UK GDP- End Date:', start, end)
+    midpoint = start + (end - start) / 2
+    date_input_start = st.sidebar.slider('UK GDP- Start Date:', start, end, midpoint)
+    date_input_end = st.sidebar.slider('UK GDP- End Date:', start, end, midpoint)
 
     #Store a dictionary into a variable
     user_data = {'UK GDP- Start Date:':date_input_start,
@@ -65,8 +70,11 @@ def get_user_input_uk_gdp(start, end):
 
 #Get feature input from user
 def get_user_input_eng_mean_temp():
-    date_input_start = st.sidebar.slider('UK Mean Temp- Start Date:', datetime.date(2020, 1, 1), datetime.date(2021, 1, 24), datetime.date(2020, 4, 8))
-    date_input_end = st.sidebar.slider('UK Mean Temp- End Date:', datetime.date(2020, 1, 1), datetime.date(2021, 1, 24), datetime.date(2020, 4, 8))
+    a = datetime.date(2020, 1, 1)
+    b = datetime.date(1999, 1, 1)
+    midpoint = a + (b - a) / 2
+    date_input_start = st.sidebar.slider('UK Mean Temp- Start Date:', datetime.date(1999, 1, 1), datetime.date(2020, 1, 1), midpoint)
+    date_input_end = st.sidebar.slider('UK Mean Temp- End Date:', datetime.date(1999, 1, 1), datetime.date(2020, 1, 1), midpoint)
 
     #Store a dictionary into a variable
     user_data = {'UK Mean Temp- Start Date:':date_input_start,
@@ -85,8 +93,11 @@ def get_user_input_eng_mean_temp():
 
 #Get feature input from user
 def get_user_input_uk_gva():
-    date_input_start = st.sidebar.slider('UK GVA- Start Date:', datetime.date(2020, 1, 1), datetime.date(2021, 1, 24), datetime.date(2020, 4, 8))
-    date_input_end = st.sidebar.slider('UK GVA- End Date:', datetime.date(2020, 1, 1), datetime.date(2021, 1, 24), datetime.date(2020, 4, 8))
+    a = datetime.date(2020, 1, 1)
+    b = datetime.date(1999, 1, 1)
+    midpoint = a + (b - a) / 2
+    date_input_start = st.sidebar.slider('UK GVA- Start Date:', datetime.date(1999, 1, 1), datetime.date(2020, 1, 1), midpoint)
+    date_input_end = st.sidebar.slider('UK GVA- End Date:', datetime.date(1999, 1, 1), datetime.date(2020, 1, 1), midpoint)
 
     #Store a dictionary into a variable
     user_data = {'UK GVA- Start Date:':date_input_start,

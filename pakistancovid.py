@@ -1,6 +1,7 @@
 import fypconnect
 import getinput
 import datetime
+from datetime import datetime
 import pandas as pd
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
@@ -39,7 +40,9 @@ def main():
     chart = st.bar_chart(data)
 
     #Store user input into variable
-    user_input = getinput.get_user_input_pakistan()
+    temp_start = fypconnect.pakistan_covid_profile_date_start[4]
+    temp_end = fypconnect.pakistan_covid_profile_date_end[4]
+    user_input = getinput.get_user_input_pakistan(temp_start, temp_end)
 
     #Set a subheader
     st.subheader('User input:')
