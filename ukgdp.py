@@ -38,10 +38,8 @@ def main():
     st.write(df.describe())
 
     #Show data as a chart
-    n = 0
-    data_list_id = [x[n] for x in data]
-    n = 2
-    data_list_gdp = [x[n] for x in data]
+    data_list_id = [x[0] for x in data]
+    data_list_gdp = [x[2] for x in data]
     list_out = []
     for i in range(0, len(data_list_gdp)):
         list_out.append(data_list_id[i])
@@ -64,7 +62,17 @@ def main():
     st.subheader('User input:')
     st.write(user_input[0])
     user_input_list = [item for item in data if ((datetime.strptime(item[1], '%Y-%m-%d') > user_input[1]) and (datetime.strptime(item[1], '%Y-%m-%d') < user_input[2]))]
-    user_input_chart_data = pd.DataFrame(user_input_list, columns=['id', 'date', 'gdp'])
+    user_data_list_id = [x[0] for x in user_input_list]
+    user_data_list_gdp = [x[2] for x in user_input_list]
+
+    user_list_out = []
+    for i in range(0, len(user_data_list_gdp)):
+        user_list_out.append(user_data_list_id[i])
+        user_list_out.append(user_data_list_gdp[i])
+    user_list_df = zip(user_list_out[::2], user_list_out[1::2])
+    user_list_comp = list(user_list_df)
+
+    user_input_chart_data = pd.DataFrame(user_list_comp, columns=['id', 'gdp'])
     st.subheader('Data drawn as a line chart using user input:')
     st.line_chart(user_input_chart_data)
 

@@ -49,6 +49,22 @@ def get_user_input_uk_gdp(start, end):
     midpoint = start + (end - start) / 2
     date_input_start = st.sidebar.slider('UK GDP- Start Date:', start, end, midpoint)
     date_input_end = st.sidebar.slider('UK GDP- End Date:', start, end, midpoint)
+    wave1 = st.sidebar.button('Covid19 1st Wave [NOT WORKNG]')
+    wave2 = st.sidebar.button('Covid19 2nd Wave [NOT WORKING]')
+    if wave1:
+        date_input_start = datetime.date(2020, 1, 1)
+        date_input_end = datetime.date(2020, 8, 1)
+        user_data = {'UK GDP- Start Date:': datetime.date(2020, 1, 1),
+                     'UK GDP- End Date:': datetime.date(2020, 8, 1)}
+        features = pd.DataFrame(user_data, index=[0])
+        return features, date_input_start, date_input_end
+    if wave2:
+        date_input_start = datetime.date(2020, 8, 1)
+        date_input_end = datetime.date(2020, 11, 1)
+        user_data = {'UK GDP- Start Date:': datetime.date(2020, 8, 1),
+                     'UK GDP- End Date:': datetime.date(2020, 11, 1)}
+        features = pd.DataFrame(user_data, index=[0])
+        return features, date_input_start, date_input_end
 
     #Store a dictionary into a variable
     user_data = {'UK GDP- Start Date:':date_input_start,
