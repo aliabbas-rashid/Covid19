@@ -25,7 +25,7 @@ def main():
     column_names = fypconnect.field_names_uk_gdp
 
     #Set a subheader
-    st.subheader('UK GDP:')
+    st.subheader('UK GDP data:')
 
     #Create a data frame
     df = pd.DataFrame(data, columns=column_names)
@@ -34,6 +34,7 @@ def main():
     st.dataframe(df)
 
     #Show statistics
+    st.subheader('Data Statistics:')
     st.write(df.describe())
 
     #Show data as a chart
@@ -48,8 +49,8 @@ def main():
 
     list_df = zip(list_out[::2], list_out[1::2])
     list_comp = list(list_df)
-    st.write(list_comp)
     chart_data = pd.DataFrame(list_comp, columns=['id', 'gdp'])
+    st.subheader('Data drawn as a line chart:')
     st.line_chart(chart_data)
 
     #Store user input into variable
@@ -62,6 +63,11 @@ def main():
     #Set a subheader
     st.subheader('User input:')
     st.write(user_input[0])
+    user_input_list = [item for item in data if ((datetime.strptime(item[1], '%Y-%m-%d') > user_input[1]) and (datetime.strptime(item[1], '%Y-%m-%d') < user_input[2]))]
+    user_input_chart_data = pd.DataFrame(user_input_list, columns=['id', 'date', 'gdp'])
+    st.subheader('Data drawn as a line chart using user input:')
+    st.line_chart(user_input_chart_data)
+
 
     #Create and train the model
     #RandomForestClassifier = RandomForestClassifier()
