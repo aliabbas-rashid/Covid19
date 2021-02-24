@@ -37,7 +37,20 @@ def main():
     st.write(df.describe())
 
     #Show data as a chart
-    chart = st.line_chart(data)
+    n = 0
+    data_list_id = [x[n] for x in data]
+    n = 2
+    data_list_gdp = [x[n] for x in data]
+    list_out = []
+    for i in range(0, len(data_list_gdp)):
+        list_out.append(data_list_id[i])
+        list_out.append(data_list_gdp[i])
+
+    list_df = zip(list_out[::2], list_out[1::2])
+    list_comp = list(list_df)
+    st.write(list_comp)
+    chart_data = pd.DataFrame(list_comp, columns=['id', 'gdp'])
+    st.line_chart(chart_data)
 
     #Store user input into variable
     temp_start = fypconnect.uk_gdp_date_start[1]
@@ -48,7 +61,7 @@ def main():
 
     #Set a subheader
     st.subheader('User input:')
-    st.write(user_input)
+    st.write(user_input[0])
 
     #Create and train the model
     #RandomForestClassifier = RandomForestClassifier()

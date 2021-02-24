@@ -21,7 +21,6 @@ def get_user_input_pakistan(start, end):
         st.write(ValueError)
     #Transform the data into data frame
     features = pd.DataFrame(user_data, index=[0])
-    #st.dataframe(features.applymap(f'color: {color}'))
     return features
 
 
@@ -42,9 +41,7 @@ def get_user_input_uk_covid_deaths(start, end):
     elif date_input_start == date_input_end:
         st.markdown("**ERROR**: Start date cannot be the same as the End date")
         st.write(ValueError)
-    #Transform the data into data frame
     features = pd.DataFrame(user_data, index=[0])
-    #st.dataframe(features.applymap(f'color: {color}'))
     return features
 
 #Get feature input from user
@@ -65,8 +62,7 @@ def get_user_input_uk_gdp(start, end):
         st.write(ValueError)
     #Transform the data into data frame
     features = pd.DataFrame(user_data, index=[0])
-    #st.dataframe(features.applymap(f'color: {color}'))
-    return features
+    return features, date_input_start, date_input_end
 
 #Get feature input from user
 def get_user_input_eng_mean_temp():
@@ -88,7 +84,6 @@ def get_user_input_eng_mean_temp():
         st.write(ValueError)
     #Transform the data into data frame
     features = pd.DataFrame(user_data, index=[0])
-    #st.dataframe(features.applymap(f'color: {color}'))
     return features
 
 #Get feature input from user
@@ -111,5 +106,4 @@ def get_user_input_uk_gva():
         st.write(ValueError)
     #Transform the data into data frame
     features = pd.DataFrame(user_data, index=[0])
-    #st.dataframe(features.applymap(f'color: {color}'))
     return features
