@@ -37,14 +37,14 @@ pakistan_covid_profile_date_end = myresult_pakistan_covid_profile_end_date[0]
 
 
 #UK GDP
-select_smt_3 = "SELECT * FROM uk_gdp"
+select_smt_3 = "SELECT * FROM uk_gdp_new"
 mycursor.execute(select_smt_3)
 myresult_uk_gdp = mycursor.fetchall()
 field_names_uk_gdp = [i[0] for i in mycursor.description]
-select_start_date_3 = "SELECT * FROM uk_gdp WHERE id=1"
+select_start_date_3 = "SELECT * FROM uk_gdp_new WHERE id=1"
 mycursor.execute(select_start_date_3)
 myresult_uk_gdp_start_date = mycursor.fetchall()
-select_end_date_3 = "SELECT * FROM uk_gdp WHERE id=165"
+select_end_date_3 = "SELECT * FROM uk_gdp_new WHERE id=168"
 mycursor.execute(select_end_date_3)
 myresult_uk_gdp_end_date = mycursor.fetchall()
 uk_gdp_date_start = myresult_uk_gdp_start_date[0]

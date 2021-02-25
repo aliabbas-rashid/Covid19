@@ -34,6 +34,7 @@ def main():
     df = pd.DataFrame(data, columns=column_names)
 
     #Show data as a table
+    df = df.rename(columns={'ID': 'index'}).set_index('index')
     st.dataframe(df)
 
     #Show statistics
