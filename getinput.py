@@ -123,3 +123,10 @@ def get_user_input_uk_gva():
     #Transform the data into data frame
     features = pd.DataFrame(user_data, index=[0])
     return features
+
+def datetime_to_float(d):
+    dt = datetime.datetime.strptime(d, '%Y-%m-%d')
+    return dt.timestamp()
+
+def float_to_datetime(fl):
+    return datetime.datetime.fromtimestamp(fl)

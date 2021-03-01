@@ -77,10 +77,11 @@ def main():
     user_list_df = zip(user_list_out[::2], user_list_out[1::2])
     user_list_comp = list(user_list_df)
 
-    user_input_chart_data = pd.DataFrame(user_list_comp, columns=['date', 'gdp'])
+    user_input_chart_data = pd.DataFrame(user_list_comp, columns=['gdp', 'date'])
     st.subheader('Data drawn as a line chart using user input:')
-    user_input_chart_data = user_input_chart_data.rename(columns={'gdp': 'index'}).set_index('index')
+    #user_input_chart_data = user_input_chart_data.rename(columns={'gdp': 'index'}).set_index('index')
     st.line_chart(user_input_chart_data)
+    st.write(user_list_comp)
 
     # Create and train the model
     x = user_data_list_id

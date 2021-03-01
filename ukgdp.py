@@ -1,14 +1,17 @@
 import fypconnect
 import getinput
 import datetime
+import ukgdpml
 from datetime import datetime
 import pandas as pd
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.datasets import make_classification
+from sklearn.tree import DecisionTreeClassifier
 from PIL import Image
 import streamlit as st
+
 
 def main():
     #title
@@ -41,6 +44,7 @@ def main():
 
     #Show data as a chart
     data_list_id = [x[0] for x in data]
+    data_list_date = [x[1] for x in data]
     data_list_gdp = [x[2] for x in data]
     list_out = []
     for i in range(0, len(data_list_gdp)):
@@ -80,8 +84,29 @@ def main():
     st.line_chart(user_input_chart_data)
 
     #Create and train the model
-    x = user_data_list_id
+    modelX_list_out_a = []
+    modelX_list_out_b = []
+    modelX_list_out_c = []
+    for i in range(0, len(data_list_id)):
+        modelX_list_out_a.append(data_list_date[i])
+        modelX_list_out_b.append(data_list_gdp[i])
+        if i <= 126:
+            modelX_list_out_c.append("Train")
+        if i > 126:
+            modelX_list_out_c.append("Test")
+    modelX_list_out_df = zip(modelX_list_out_a, modelX_list_out_b, modelX_list_out_c)
+    modelX_list_out_comp = list(modelX_list_out_df)
+    df2 = pd.DataFrame(modelX_list_out_comp, columns=['Date', 'gdp', 'Class'])
+    ukgdpml.main(df2)
+    """
+    X = modelX_list_out_comp
     y = user_data_list_gdp
+    model = DecisionTreeClassifier()
+    st.write(X)
+    st.write(type(y[0]))
+    model.fit(X, y)
+    predictions = model.predict([[datetime.date('2021-02-01')]])
+    st.write(predictions)
     #RandomForestClassifier.fit(x_train, y_train)
 
     #Show models metrics
@@ -94,3 +119,4 @@ def main():
     #Set a subheader and display classificaiton
     st.subheader('Classification: ')
     #st.write(prediction)
+    """
