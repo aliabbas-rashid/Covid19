@@ -5,7 +5,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score
 from sklearn.metrics import mean_squared_error
-import math
+import numpy as np
 import streamlit as st
 import pandas as pd
 
@@ -66,12 +66,12 @@ def main(df):
 
     # Code lines 1 to 3
     pred_train_tree = dtree.predict(X_train)
-    st.write(math.sqrt(mean_squared_error(y_train, pred_train_tree)))
+    st.write(np.sqrt(mean_squared_error(y_train, pred_train_tree)))
     st.write(r2_score(y_train, pred_train_tree))
 
     # Code lines 4 to 6
     pred_test_tree = dtree.predict(X_test)
-    st.write(math.sqrt(mean_squared_error(y_test, pred_test_tree)))
+    st.write(np.sqrt(mean_squared_error(y_test, pred_test_tree)))
     st.write(r2_score(y_test, pred_test_tree))
 
 ######################################################################################
@@ -91,22 +91,22 @@ def main(df):
 
     # Print root-mean-square-error and R-squared value for regression tree 'dtree1' on training data
     st.write("RMSE and R-squared value for regression tree 'dtree1' on training data")
-    st.write(math.sqrt(mean_squared_error(y_train, tr1)))
+    st.write(np.sqrt(mean_squared_error(y_train, tr1)))
     st.write(r2_score(y_train, tr1))
 
     # Print root-mean-square-error and R-squared value for regression tree 'dtree1' on testing data
     st.write("RMSE and R-squared value for regression tree 'dtree1' on testing data")
-    st.write(math.sqrt(mean_squared_error(y_test, y1)))
+    st.write(np.sqrt(mean_squared_error(y_test, y1)))
     st.write(r2_score(y_test, y1))
 
     # Print root-mean-square-error and R-squared value for regression tree 'dtree2' on training data
     st.write("RMSE and R-squared value for regression tree 'dtree2' on training data")
-    st.write(math.sqrt(mean_squared_error(y_train, tr2)))
+    st.write(np.sqrt(mean_squared_error(y_train, tr2)))
     st.write(r2_score(y_train, tr2))
 
     # Print root-mean-square-error and R-squared value for regression tree 'dtree2' on testing data
     st.write("RMSE and R-squared value for regression tree 'dtree2' on testing data")
-    st.write(math.sqrt(mean_squared_error(y_test, y2)))
+    st.write(np.sqrt(mean_squared_error(y_test, y2)))
     st.write(r2_score(y_test, y2))
 
     # Build regressor tree
@@ -116,10 +116,10 @@ def main(df):
     pred_train_rf = model_rf.predict(X_train)
     st.write("----")
     st.write("Random forest regressor RMSE and R-squared value for train set")
-    st.write(math.sqrt(mean_squared_error(y_train, pred_train_rf)))
+    st.write(np.sqrt(mean_squared_error(y_train, pred_train_rf)))
     st.write(r2_score(y_train, pred_train_rf))
 
     pred_test_rf = model_rf.predict(X_test)
     st.write("Random forest regressor RMSE and R-squared value for test set")
-    st.write(math.sqrt(mean_squared_error(y_test, pred_test_rf)))
+    st.write(np.sqrt(mean_squared_error(y_test, pred_test_rf)))
     st.write(r2_score(y_test, pred_test_rf))
