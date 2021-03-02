@@ -14,35 +14,35 @@ import streamlit as st
 
 
 def main():
-    #title
+    # title
     st.write("""
-    # UK Gross Domestic Product
+    #  UK Gross Domestic Product
     Graph for the GDP for the UK
     """)
 
-    #Image
+    # Image
     image = Image.open('C:/Users/aliab/PycharmProjects/Covid19/pictures/8000.jpg')
     st.image(image, caption='UK FLAG', use_column_width=True)
 
-    #Data
+    # Data
     data = fypconnect.myresult_uk_gdp
     column_names = fypconnect.field_names_uk_gdp
 
-    #Set a subheader
+    # Set a subheader
     st.subheader('UK GDP data:')
 
-    #Create a data frame
+    # Create a data frame
     df = pd.DataFrame(data, columns=column_names)
 
-    #Show data as a table
+    # Show data as a table
     df = df.rename(columns={'id': 'index'}).set_index('index')
     st.dataframe(df)
 
-    #Show statistics
+    # Show statistics
     st.subheader('Data Statistics:')
     st.write(df.describe())
 
-    #Show data as a chart
+    # Show data as a chart
     data_list_id = [x[0] for x in data]
     data_list_date = [x[1] for x in data]
     data_list_gdp = [x[2] for x in data]
@@ -57,14 +57,14 @@ def main():
     st.subheader('Data drawn as a line chart:')
     st.line_chart(chart_data)
 
-    #Store user input into variable
+    # Store user input into variable
     temp_start = fypconnect.uk_gdp_date_start[1]
     temp_end = fypconnect.uk_gdp_date_end[1]
     start_date_obj = datetime.strptime(temp_start, '%Y-%m-%d')
     end_date_obj = datetime.strptime(temp_end, '%Y-%m-%d')
     user_input = getinput.get_user_input_uk_gdp(start_date_obj, end_date_obj)
 
-    #Set a subheader
+    # Set a subheader
     st.subheader('User input:')
     st.write(user_input[0])
     user_input_list = [item for item in data if ((datetime.strptime(item[1], '%Y-%m-%d') > user_input[1]) and (datetime.strptime(item[1], '%Y-%m-%d') < user_input[2]))]
@@ -83,7 +83,7 @@ def main():
     st.subheader('Data drawn as a line chart using user input:')
     st.line_chart(user_input_chart_data)
 
-    #Create and train the model
+    # Create and train the model
     modelX_list_out_a = []
     modelX_list_out_b = []
     modelX_list_out_c = []
@@ -107,16 +107,16 @@ def main():
     model.fit(X, y)
     predictions = model.predict([[datetime.date('2021-02-01')]])
     st.write(predictions)
-    #RandomForestClassifier.fit(x_train, y_train)
+    # RandomForestClassifier.fit(x_train, y_train)
 
-    #Show models metrics
+    # Show models metrics
     st.subheader('Model Test Accuracy Score:')
-    #st.write(str(accuracy_score(y_test, RandomForestClassifier.predict(x_test)) *100) + '%')
+    # st.write(str(accuracy_score(y_test, RandomForestClassifier.predict(x_test)) *100) + '%')
 
-    #Store the models predictions in variable
-    #prediction = RandomForestClassifier.predict(user_input)
+    # Store the models predictions in variable
+    # prediction = RandomForestClassifier.predict(user_input)
 
-    #Set a subheader and display classificaiton
+    # Set a subheader and display classificaiton
     st.subheader('Classification: ')
-    #st.write(prediction)
+    # st.write(prediction)
     """

@@ -1,5 +1,3 @@
-import datetime
-from datetime import datetime
 from sklearn import model_selection
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor

@@ -4,7 +4,6 @@ import pakistancovid
 import engmeantemp
 import ukgvaavg
 import checkpw
-import ukgdptest
 import streamlit as st
 from PIL import Image
 

@@ -7,7 +7,7 @@ except mysql.Error as e:
 
 mycursor = mydb.cursor()
 
-#UK DEATHS
+# UK DEATHS
 select_smt = "SELECT * FROM uk_deaths_within_28_days_of_positive_test_by_date"
 mycursor.execute(select_smt)
 myresult_uk_death = mycursor.fetchall()
@@ -21,7 +21,7 @@ myresult_uk_death_end_date = mycursor.fetchall()
 uk_death_date_start = myresult_uk_death_start_date[0]
 uk_death_date_end = myresult_uk_death_end_date[0]
 
-#Pakistan Profile
+# Pakistan Profile
 select_smt_2 = "SELECT * FROM pakistan_covid_profile"
 mycursor.execute(select_smt_2)
 myresult_pakistan_profile = mycursor.fetchall()
@@ -36,7 +36,7 @@ pakistan_covid_profile_date_start = myresult_pakistan_covid_profile_start_date[0
 pakistan_covid_profile_date_end = myresult_pakistan_covid_profile_end_date[0]
 
 
-#UK GDP
+# UK GDP
 select_smt_3 = "SELECT * FROM uk_gdp_new"
 mycursor.execute(select_smt_3)
 myresult_uk_gdp = mycursor.fetchall()
@@ -50,7 +50,7 @@ myresult_uk_gdp_end_date = mycursor.fetchall()
 uk_gdp_date_start = myresult_uk_gdp_start_date[0]
 uk_gdp_date_end = myresult_uk_gdp_end_date[0]
 
-#UK MEAN TEMP
+# UK MEAN TEMP
 select_smt_4 = "SELECT * FROM eng_mean_temp"
 mycursor.execute(select_smt_4)
 myresult_eng_mean_temp = mycursor.fetchall()
@@ -64,7 +64,7 @@ myresult_eng_mean_temp_end_date = mycursor.fetchall()
 eng_mean_temp_date_start = myresult_eng_mean_temp_start_date[0]
 eng_mean_temp_date_end = myresult_eng_mean_temp_end_date[0]
 
-#UK UK GVA
+# UK UK GVA
 select_smt_5 = "SELECT * FROM uk_gross_value_added_avg"
 mycursor.execute(select_smt_5)
 myresult_uk_gva = mycursor.fetchall()
