@@ -10,55 +10,55 @@ from PIL import Image
 import streamlit as st
 
 def main():
-    #title
+    # title
     st.write("""
-    # Pakistan Covid Profile
+    #  Pakistan Covid Profile
     Graphs containing statistics from Pakistan COVID Pandemic
     """)
 
-    #Image
+    # Image
     image = Image.open('C:/Users/aliab/PycharmProjects/Covid19/pictures/9000.jpg')
     st.image(image, caption='PAKISTAN COVID', use_column_width=True)
 
-    #Data
+    # Data
     data = fypconnect.myresult_pakistan_profile
     column_names = fypconnect.field_names_pakistan_profile
 
-    #Set a subheader
+    # Set a subheader
     st.subheader('Pakistan Covid Profile:')
 
-    #Create data frame
+    # Create data frame
     df = pd.DataFrame(data, columns=column_names)
 
-    #Show data as a table
+    # Show data as a table
     st.dataframe(df)
 
-    #Show statistics
+    # Show statistics
     st.write(df.describe())
 
-    #Show data as a chart
+    # Show data as a chart
     chart = st.bar_chart(data)
 
-    #Store user input into variable
+    # Store user input into variable
     temp_start = fypconnect.pakistan_covid_profile_date_start[4]
     temp_end = fypconnect.pakistan_covid_profile_date_end[4]
     user_input = getinput.get_user_input_pakistan(temp_start, temp_end)
 
-    #Set a subheader
+    # Set a subheader
     st.subheader('User input:')
     st.write(user_input)
 
-    #Create and train the model
-    #RandomForestClassifier = RandomForestClassifier()
-    #RandomForestClassifier.fit(x_train, y_train)
+    # Create and train the model
+    # RandomForestClassifier = RandomForestClassifier()
+    # RandomForestClassifier.fit(x_train, y_train)
 
-    #Show models metrics
+    # Show models metrics
     st.subheader('Model Test Accuracy Score:')
-    #st.write(str(accuracy_score(y_test, RandomForestClassifier.predict(x_test)) *100) + '%')
+    # st.write(str(accuracy_score(y_test, RandomForestClassifier.predict(x_test)) *100) + '%')
 
-    #Store the models predictions in variable
-    #prediction = RandomForestClassifier.predict(user_input)
+    # Store the models predictions in variable
+    # prediction = RandomForestClassifier.predict(user_input)
 
-    #Set a subheader and display classificaiton
+    # Set a subheader and display classificaiton
     st.subheader('Classification: ')
-    #st.write(prediction)
+    # st.write(prediction)
