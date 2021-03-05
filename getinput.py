@@ -80,6 +80,14 @@ def get_user_input_uk_gdp(start, end):
     features = pd.DataFrame(user_data, index=[0])
     return features, date_input_start, date_input_end
 
+# Get feature for prediction from user
+def get_predict_input(start, end):
+    midpoint = start + (end - start) / 2
+    predict_input = st.sidebar.slider('Prediction GDP date: ', start, end, midpoint)
+    user_data = {'Predict date: ': predict_input}
+    features = pd.DataFrame(user_data, index=[0])
+    return features, predict_input
+
 # Get feature input from user
 def get_user_input_eng_mean_temp():
     a = datetime.date(2020, 1, 1)

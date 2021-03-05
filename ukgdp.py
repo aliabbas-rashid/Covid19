@@ -64,6 +64,13 @@ def main():
     end_date_obj = datetime.strptime(temp_end, '%Y-%m-%d')
     user_input = getinput.get_user_input_uk_gdp(start_date_obj, end_date_obj)
 
+    # Get prediction date
+    temp1 = "2021-03-01"
+    temp2 = "2022-03-01"
+    pred_start_date_obj = datetime.strptime(temp1, '%Y-%m-%d')
+    pred_end_date_obj = datetime.strptime(temp2, '%Y-%m-%d')
+    pred = getinput.get_predict_input(pred_start_date_obj, pred_end_date_obj)
+
     # Set a subheader
     st.subheader('User input:')
     st.write(user_input[0])
@@ -97,7 +104,8 @@ def main():
     modelX_list_out_df = zip(modelX_list_out_a, modelX_list_out_b, modelX_list_out_c)
     modelX_list_out_comp = list(modelX_list_out_df)
     df2 = pd.DataFrame(modelX_list_out_comp, columns=['Date', 'gdp', 'Class'])
-    ukgdpml.main(df2)
+    predict = pd.DataFrame(pred, columns=['Date'])
+    ukgdpml.main(df2, predict)
     """
     X = modelX_list_out_comp
     y = user_data_list_gdp

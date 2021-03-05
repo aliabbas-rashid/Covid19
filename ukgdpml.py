@@ -7,7 +7,7 @@ import numpy as np
 import streamlit as st
 import pandas as pd
 
-def main(df):
+def main(df, pred):
 
     # Split date into year, month, day etc...
     df['Date'] = pd.to_datetime(df['Date'])
@@ -62,48 +62,48 @@ def main(df):
     dtree = DecisionTreeRegressor(max_depth=8, min_samples_leaf=0.13, random_state=3)
     dtree.fit(X_train, y_train)
 
-    # Code lines 1 to 3
+    # Predictions for decision tree on the train data
     pred_train_tree = dtree.predict(X_train)
     st.write(np.sqrt(mean_squared_error(y_train, pred_train_tree)))
     st.write(r2_score(y_train, pred_train_tree))
 
-    # Code lines 4 to 6
+    # Predictions for decision tree on the test data
     pred_test_tree = dtree.predict(X_test)
     st.write(np.sqrt(mean_squared_error(y_test, pred_test_tree)))
     st.write(r2_score(y_test, pred_test_tree))
 
 ######################################################################################
-    # Code Lines 1 to 4: Fit the regression tree 'dtree1' and 'dtree2'
+    # Fit the regression tree 'dtree1' and 'dtree2' with different max depths for testing
     dtree1 = DecisionTreeRegressor(max_depth=2)
     dtree2 = DecisionTreeRegressor(max_depth=5)
     dtree1.fit(X_train, y_train)
     dtree2.fit(X_train, y_train)
 
-    # Code Lines 5 to 6: Predict on training data
+    # Predictions for decision tree 1 and 2 on the train data
     tr1 = dtree1.predict(X_train)
     tr2 = dtree2.predict(X_train)
 
-    # Code Lines 7 to 8: Predict on testing data
+    # Predictions for decision tree 1 and 2 on the test data
     y1 = dtree1.predict(X_test)
     y2 = dtree2.predict(X_test)
 
-    # Print root-mean-square-error and R-squared value for regression tree 'dtree1' on training data
-    st.write("RMSE and R-squared value for regression tree 'dtree1' on training data")
+    # Print root-mean-square-error and R-squared value for regression tree 1 on training data
+    st.write("RMSE and R-squared value for regression tree 1 on training data")
     st.write(np.sqrt(mean_squared_error(y_train, tr1)))
     st.write(r2_score(y_train, tr1))
 
-    # Print root-mean-square-error and R-squared value for regression tree 'dtree1' on testing data
-    st.write("RMSE and R-squared value for regression tree 'dtree1' on testing data")
+    # Print root-mean-square-error and R-squared value for regression tree 1 on testing data
+    st.write("RMSE and R-squared value for regression tree 1 on testing data")
     st.write(np.sqrt(mean_squared_error(y_test, y1)))
     st.write(r2_score(y_test, y1))
 
-    # Print root-mean-square-error and R-squared value for regression tree 'dtree2' on training data
-    st.write("RMSE and R-squared value for regression tree 'dtree2' on training data")
+    # Print root-mean-square-error and R-squared value for regression tree 2 on training data
+    st.write("RMSE and R-squared value for regression tree 2 on training data")
     st.write(np.sqrt(mean_squared_error(y_train, tr2)))
     st.write(r2_score(y_train, tr2))
 
-    # Print root-mean-square-error and R-squared value for regression tree 'dtree2' on testing data
-    st.write("RMSE and R-squared value for regression tree 'dtree2' on testing data")
+    # Print root-mean-square-error and R-squared value for regression tree 2 on testing data
+    st.write("RMSE and R-squared value for regression tree 2 on testing data")
     st.write(np.sqrt(mean_squared_error(y_test, y2)))
     st.write(r2_score(y_test, y2))
 
@@ -121,3 +121,33 @@ def main(df):
     st.write("Random forest regressor RMSE and R-squared value for test set")
     st.write(np.sqrt(mean_squared_error(y_test, pred_test_rf)))
     st.write(r2_score(y_test, pred_test_rf))
+
+    # Predictions on user input data
+    pred['Date'] = pd.to_datetime(pred['Date'])
+    pred['Date'] = df['Date'].dt.strftime('%m.%d.%Y')
+    pred['year'] = pd.DatetimeIndex(pred['Date']).year
+    pred['month'] = pd.DatetimeIndex(pred['Date']).month
+    pred['day'] = pd.DatetimeIndex(pred['Date']).day
+    pred['dayofyear'] = pd.DatetimeIndex(pred['Date']).dayofyear
+    pred['weekofyear'] = pd.DatetimeIndex(pred['Date']).weekofyear
+    pred['weekday'] = pd.DatetimeIndex(pred['Date']).weekday
+    pred['quarter'] = pd.DatetimeIndex(pred['Date']).quarter
+    pred['is_month_start'] = pd.DatetimeIndex(pred['Date']).is_month_start
+    pred['is_month_end'] = pd.DatetimeIndex(pred['Date']).is_month_end
+
+    pred = pred.drop(['Date'], axis=1)
+
+    # Dummy encoding
+    pred = pd.get_dummies(pred, columns=['year'], drop_first=True, prefix='year')
+
+    pred = pd.get_dummies(pred, columns=['month'], drop_first=True, prefix='month')
+
+    pred = pd.get_dummies(pred, columns=['weekday'], drop_first=True, prefix='wday')
+    pred = pd.get_dummies(pred, columns=['quarter'], drop_first=True, prefix='qrtr')
+
+    pred = pd.get_dummies(pred, columns=['is_month_start'], drop_first=True, prefix='m_start')
+
+    pred = pd.get_dummies(pred, columns=['is_month_end'], drop_first=True, prefix='m_end')
+
+    #user_predict = model_rf.predict(predict)
+    #st.write(user_predict)
