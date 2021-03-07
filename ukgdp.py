@@ -1,6 +1,8 @@
 import fypconnect
 import getinput
 import datetime
+
+import mltest
 import ukgdpml
 from datetime import datetime
 import pandas as pd
@@ -104,8 +106,11 @@ def main():
     modelX_list_out_df = zip(modelX_list_out_a, modelX_list_out_b, modelX_list_out_c)
     modelX_list_out_comp = list(modelX_list_out_df)
     df2 = pd.DataFrame(modelX_list_out_comp, columns=['Date', 'gdp', 'Class'])
-    predict = pd.DataFrame(pred, columns=['Date'])
-    ukgdpml.main(df2, predict)
+    pred2 = []
+    pred2.append(pred[1].strftime('%Y-%m-%d'))
+    predict = pd.DataFrame(pred2, columns=['Date'])
+    #ukgdpml.main(df2, predict)
+    mltest.main(df2)
     """
     X = modelX_list_out_comp
     y = user_data_list_gdp

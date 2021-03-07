@@ -1,7 +1,7 @@
 from sklearn import model_selection
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import r2_score
+from sklearn.metrics import r2_score, accuracy_score
 from sklearn.metrics import mean_squared_error
 import numpy as np
 import streamlit as st
@@ -80,8 +80,8 @@ def main(df, pred):
     dtree2.fit(X_train, y_train)
 
     # Predictions for decision tree 1 and 2 on the train data
-    tr1 = dtree1.predict(X_train)
-    tr2 = dtree2.predict(X_train)
+    tree1 = dtree1.predict(X_train)
+    tree2 = dtree2.predict(X_train)
 
     # Predictions for decision tree 1 and 2 on the test data
     y1 = dtree1.predict(X_test)
@@ -89,8 +89,8 @@ def main(df, pred):
 
     # Print root-mean-square-error and R-squared value for regression tree 1 on training data
     st.write("RMSE and R-squared value for regression tree 1 on training data")
-    st.write(np.sqrt(mean_squared_error(y_train, tr1)))
-    st.write(r2_score(y_train, tr1))
+    st.write(np.sqrt(mean_squared_error(y_train, tree1)))
+    st.write(r2_score(y_train, tree1))
 
     # Print root-mean-square-error and R-squared value for regression tree 1 on testing data
     st.write("RMSE and R-squared value for regression tree 1 on testing data")
@@ -99,8 +99,8 @@ def main(df, pred):
 
     # Print root-mean-square-error and R-squared value for regression tree 2 on training data
     st.write("RMSE and R-squared value for regression tree 2 on training data")
-    st.write(np.sqrt(mean_squared_error(y_train, tr2)))
-    st.write(r2_score(y_train, tr2))
+    st.write(np.sqrt(mean_squared_error(y_train, tree2)))
+    st.write(r2_score(y_train, tree2))
 
     # Print root-mean-square-error and R-squared value for regression tree 2 on testing data
     st.write("RMSE and R-squared value for regression tree 2 on testing data")
@@ -123,8 +123,9 @@ def main(df, pred):
     st.write(r2_score(y_test, pred_test_rf))
 
     # Predictions on user input data
+    # Split date into different values
     pred['Date'] = pd.to_datetime(pred['Date'])
-    pred['Date'] = df['Date'].dt.strftime('%m.%d.%Y')
+    pred['Date'] = pred['Date'].dt.strftime('%Y.%m.%d')
     pred['year'] = pd.DatetimeIndex(pred['Date']).year
     pred['month'] = pd.DatetimeIndex(pred['Date']).month
     pred['day'] = pd.DatetimeIndex(pred['Date']).day
@@ -134,20 +135,9 @@ def main(df, pred):
     pred['quarter'] = pd.DatetimeIndex(pred['Date']).quarter
     pred['is_month_start'] = pd.DatetimeIndex(pred['Date']).is_month_start
     pred['is_month_end'] = pd.DatetimeIndex(pred['Date']).is_month_end
-
     pred = pred.drop(['Date'], axis=1)
 
-    # Dummy encoding
-    pred = pd.get_dummies(pred, columns=['year'], drop_first=True, prefix='year')
-
-    pred = pd.get_dummies(pred, columns=['month'], drop_first=True, prefix='month')
-
-    pred = pd.get_dummies(pred, columns=['weekday'], drop_first=True, prefix='wday')
-    pred = pd.get_dummies(pred, columns=['quarter'], drop_first=True, prefix='qrtr')
-
-    pred = pd.get_dummies(pred, columns=['is_month_start'], drop_first=True, prefix='m_start')
-
-    pred = pd.get_dummies(pred, columns=['is_month_end'], drop_first=True, prefix='m_end')
-
-    #user_predict = model_rf.predict(predict)
-    #st.write(user_predict)
+    predict = pred.values
+    st.write(predict)
+    user_predict = model_rf.predict(predict)
+    st.write(user_predict)
