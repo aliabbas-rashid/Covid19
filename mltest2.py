@@ -1,15 +1,26 @@
 import numpy as np
 import pandas as pd
-from datetime import datetime
-from sklearn import linear_model
 import streamlit as st
 import matplotlib.pylab as plt
-from matplotlib.pylab import rcParams
-from statsmodels.tsa.stattools import adfuller
-from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
+from matplotlib import pyplot
 from sklearn.metrics import mean_squared_error
-from statsmodels.tsa.arima_model import ARIMA
 from statsmodels.tsa.ar_model import AutoReg
+from math import sqrt
+
+# Create a difference transform of the data set
+def difference(ds):
+    diff = list()
+    for i in range(1, len(ds)):
+        value = ds[i] - ds[i -1]
+        diff.append(value)
+    return diff
+
+# Make a prediction (give regression coefficients and lag obs)
+def predict(coef, h):
+    yhat = coef[0]
+    for i in range(1, len(coef)):
+        yhat += coef[i] * h[-i]
+    return yhat
 
 def main(df):
     df = df.drop(['Class'], axis=1)
@@ -38,18 +49,6 @@ def main(df):
     ax2.legend(loc='best')
     st.write(fig2)
 
-    """
-    DICKEY FULLER TEST TAKES A LONG TIME TO RUN
-    st.write("Dickey-Fuller Test: ")
-    dftest = adfuller(indexedDataset['GDP'], autolag='AIC')
-
-    dfoutput = pd.Series(dftest[0:4], index=['Test Statistic', 'p-value', '#Lags used', 'Number of Observations Used'])
-    for key, value in dftest[4].items():
-        dfoutput['Critical Value (%s)'%key] = value
-
-    print(dfoutput)
-    """
-
     new_df = pd.concat([indexedDataset, indexedDataset.shift(1)], axis=1)
     new_df.columns = ['GDP', 'GDP_forecasted']
 
@@ -59,16 +58,22 @@ def main(df):
     gdp_error_sq = np.sqrt(gdp_error)
     st.write(gdp_error_sq)
 
-    # ARIMA(p, d, q)
-    st.write(plot_acf(indexedDataset)) # to identify q = 17
-    st.write(plot_pacf(indexedDataset, lags=15)) # to identify p = 4
-
-    gdp_train = indexedDataset.iloc[0:126]
+    gdp_train = indexedDataset.iloc[1:126]
     gdp_test = indexedDataset.iloc[126:]
 
-    #gdp_model = ARIMA(gdp_train.astype(int), order=(4, 1, 18))
-    #gdp_model_fit = gdp_model.fit(transparams=False)
+    model = AutoReg(gdp_train.astype(float), lags=6)
+    model_fit = model.fit()
+    coef = model_fit.params
+    st.write(gdp_train)
 
+    history = [gdp_train[i] for i in range(len(gdp_train))]
+    predictions = list()
+    for t in range(len(gdp_test)):
+        yhat = predict(coef, history)
+        obs = gdp_test[t]
+        predictions.append(yhat)
+        history.append(obs)
 
-    #for index, row in indexedDataset.iterrows():
-    #    row['gdp'] = int(round(row['gdp']))
+    rsme = sqrt(mean_squared_error(gdp_test, predictions))
+
+    st.write(f"Test RSME: {rsme}.3f")
