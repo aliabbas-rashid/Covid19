@@ -1,4 +1,5 @@
 import mysql.connector
+import global_variables
 
 try:
     mydb = mysql.connector.connect(host="localhost", user="root", passwd="finalyear123", database="fypdb")
@@ -40,6 +41,7 @@ pakistan_covid_profile_date_end = myresult_pakistan_covid_profile_end_date[0]
 select_smt_3 = "SELECT * FROM uk_gdp_new"
 mycursor.execute(select_smt_3)
 myresult_uk_gdp = mycursor.fetchall()
+global_variables.date = myresult_uk_gdp
 field_names_uk_gdp = [i[0] for i in mycursor.description]
 select_start_date_3 = "SELECT * FROM uk_gdp_new WHERE id=1"
 mycursor.execute(select_start_date_3)

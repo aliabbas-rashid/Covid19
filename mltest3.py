@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.datasets import load_iris
 import matplotlib.pylab as plt
 from sklearn.linear_model import LinearRegression as lm
+from datetime import datetime
 
 def dt_float(d):
     return d.timestamp()
@@ -53,7 +54,14 @@ def main(df, pred):
     ax2.set_ylabel("GDP")
     st.write(fig2)
 
-    st.write(type(x_train))
+    x_train['Date'] = [datetime.strptime(x, '%Y-%m-%d') for x in x_train['Date']]
+    x_test['Date'] = [datetime.strptime(x, '%Y-%m-%d') for x in x_test['Date']]
+
+    x_train['Date'] = [datetime.timestamp(x) for x in x_train['Date']]
+    x_test['Date'] = [datetime.timestamp(x) for x in x_test['Date']]
+
+    st.write(x_train)
+    st.write(x_test)
     model = lm().fit(x_train, y_train)
     predictions = model.predict(x_test)
 
