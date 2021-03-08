@@ -42,7 +42,7 @@ def main(df):
     ax2 = fig2.add_subplot(1, 1, 1)
     ax2.plot(indexedDataset, color='blue', label='Original')
     ax2.plot(rolmean, color='red', label='Rolling Mean')
-    #ax2.plot(rolstd, color='black', label='Rolling STD')
+    ax2.plot(rolstd, color='black', label='Rolling STD')
 
     ax2.set_xlabel("Date")
     ax2.set_ylabel("GDP")

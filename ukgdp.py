@@ -4,6 +4,7 @@ import datetime
 
 import mltest
 import mltest2
+import mltest3
 import ukgdpml
 from datetime import datetime
 import pandas as pd
@@ -111,7 +112,7 @@ def main():
     pred2.append(pred[1].strftime('%Y-%m-%d'))
     predict = pd.DataFrame(pred2, columns=['Date'])
     #ukgdpml.main(df2, predict)
-    mltest2.main(df2)
+    mltest3.main(df2, predict)
     """
     X = modelX_list_out_comp
     y = user_data_list_gdp
