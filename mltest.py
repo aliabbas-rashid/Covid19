@@ -31,7 +31,7 @@ def main(df):
     ax2 = fig2.add_subplot(1, 1, 1)
     ax2.plot(indexedDataset, color='blue', label='Original')
     ax2.plot(rolmean, color='red', label='Rolling Mean')
-    #ax2.plot(rolstd, color='black', label='Rolling STD')
+    ax2.plot(rolstd, color='black', label='Rolling STD')
 
     ax2.set_xlabel("Date")
     ax2.set_ylabel("GDP")
@@ -66,9 +66,9 @@ def main(df):
     gdp_train = indexedDataset.iloc[0:126]
     gdp_test = indexedDataset.iloc[126:]
 
-    #gdp_model = ARIMA(gdp_train.astype(int), order=(4, 1, 18))
-    #gdp_model_fit = gdp_model.fit(transparams=False)
+    gdp_model = ARIMA(gdp_train.astype(int), order=(4, 1, 18))
+    gdp_model_fit = gdp_model.fit(transparams=False)
 
 
-    #for index, row in indexedDataset.iterrows():
-    #    row['gdp'] = int(round(row['gdp']))
+    for index, row in indexedDataset.iterrows():
+        row['gdp'] = int(round(row['gdp']))

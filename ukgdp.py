@@ -112,7 +112,7 @@ def main():
     pred2.append(pred[1].strftime('%Y-%m-%d'))
     predict = pd.DataFrame(pred2, columns=['Date'])
     #ukgdpml.main(df2, predict)
-    mltest3.main(df2, predict)
+    mltest.main(df2)
     """
     X = modelX_list_out_comp
     y = user_data_list_gdp
