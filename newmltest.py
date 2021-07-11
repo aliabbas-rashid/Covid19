@@ -18,5 +18,21 @@ def main(df):
     data_new = fypconnect.myresult_uk_gdp
     #st.write(data_new)
 
-    st.write(fypconnect.myresult_gdp_column)
-    st.write(fypconnect.myresult_date_column)
+    gdp_column = fypconnect.myresult_gdp_column
+    date_column = fypconnect.myresult_date_column
+
+    arrayofdates = []
+
+    for dict in date_column:
+        arrayofdates.append(dict(zip(date_column, dict)))
+
+    st.write("DATE COLUMN")
+    st.write(date_column)
+    st.write("ARRAY OF DATES")
+    st.write(arrayofdates)
+
+    dataframe_new = pd.DataFrame({'date':date_column, 'gdp':gdp_column})
+    st.write(dataframe_new)
+
+    ml = sklearn.linear_model.LinearRegression()
+    ml.fit(date_column, gdp_column)
