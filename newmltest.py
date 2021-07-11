@@ -27,25 +27,26 @@ def main(df):
     st.write("THIS IS DATE LIST")
     st.write(type(date_column[1]))
 
-    list_out = []
+    list_out_gdp = []
     for i in gdp_column:
-        list_out.append(list(i))
+        list_out_gdp.append(list(i))
 
     st.write("!£Q$£$%£%^£^£$!£")
-    st.write(list_out)
+    st.write(list_out_gdp)
 
-    list_out_2 = []
+    list_out_date = []
     for i in date_column:
-        list_out_2.append(pd.to_datetime(list(i)))
+        list_out_date.append(pd.to_datetime(list(i)))
 
     st.write("LIST INIT")
-    st.write(list_out_2)
+    st.write(list_out_date)
 
-    dataframe_new = pd.DataFrame({'date':list_out_2, 'gdp':list_out})
+    dataframe_new = pd.DataFrame({'date':list_out_date, 'gdp':list_out_gdp})
     st.write("THIS IS NEW DATA FRAME")
     st.write(dataframe_new)
 
     ml = sklearn.linear_model.LinearRegression()
-    ml.fit(list_out_2, list_out)
+    ml.fit(list_out_date.reshape(-1,1), list_out_gdp.reshape(-1,1))
 
-    
+    data_predict = ml.predict(list_out_date.reshape(-1,1))
+    list_predicted_dates = []
