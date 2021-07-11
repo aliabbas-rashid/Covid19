@@ -15,24 +15,37 @@ from statsmodels.tsa.ar_model import AutoReg
 
 def main(df):
 
+    #df_new = pd.read_excel(r'C:\Users\aliab\PycharmProjects\Covid19\data.xlsx')
+    #st.write(df_new)
+
     data_new = fypconnect.myresult_uk_gdp
     #st.write(data_new)
 
     gdp_column = fypconnect.myresult_gdp_column
     date_column = fypconnect.myresult_date_column
+    date_list = list(date_column)
+    st.write("THIS IS DATE LIST")
+    st.write(type(date_column[1]))
 
-    arrayofdates = []
+    list_out = []
+    for i in gdp_column:
+        list_out.append(list(i))
 
-    for dict in date_column:
-        arrayofdates.append(dict(zip(date_column, dict)))
+    st.write("!£Q$£$%£%^£^£$!£")
+    st.write(list_out)
 
-    st.write("DATE COLUMN")
-    st.write(date_column)
-    st.write("ARRAY OF DATES")
-    st.write(arrayofdates)
+    list_out_2 = []
+    for i in date_column:
+        list_out_2.append(pd.to_datetime(list(i)))
 
-    dataframe_new = pd.DataFrame({'date':date_column, 'gdp':gdp_column})
+    st.write("LIST INIT")
+    st.write(list_out_2)
+
+    dataframe_new = pd.DataFrame({'date':list_out_2, 'gdp':list_out})
+    st.write("THIS IS NEW DATA FRAME")
     st.write(dataframe_new)
 
     ml = sklearn.linear_model.LinearRegression()
-    ml.fit(date_column, gdp_column)
+    ml.fit(list_out_2, list_out)
+
+    
