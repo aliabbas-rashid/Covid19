@@ -52,6 +52,14 @@ myresult_uk_gdp_end_date = mycursor.fetchall()
 uk_gdp_date_start = myresult_uk_gdp_start_date[0]
 uk_gdp_date_end = myresult_uk_gdp_end_date[0]
 
+select_date_column = "SELECT date FROM uk_gdp_new"
+mycursor.execute(select_date_column)
+myresult_date_column = mycursor.fetchall()
+
+select_gdp_column = "SELECT gdp FROM uk_gdp_new"
+mycursor.execute(select_gdp_column)
+myresult_gdp_column = mycursor.fetchall()
+
 # UK MEAN TEMP
 select_smt_4 = "SELECT * FROM eng_mean_temp"
 mycursor.execute(select_smt_4)

@@ -54,7 +54,7 @@ def main(df):
     new_df.columns = ['GDP', 'GDP_forecasted']
 
     gdp_test = new_df.iloc[1:]
-    st.write(gdp_test.head())
+    st.write(gdp_test)
     gdp_error = mean_squared_error(gdp_test.GDP, gdp_test.GDP_forecasted)
     gdp_error_sq = np.sqrt(gdp_error)
     st.write(gdp_error_sq)
