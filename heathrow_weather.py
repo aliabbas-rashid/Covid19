@@ -56,6 +56,21 @@ def main():
     regr.fit(train_X, train_y)
     prediction2 = regr.predict(test_X)
 
+    st.write("USING MAX DEPTH OF 5")
+    regr3 = RandomForestRegressor(max_depth=5, random_state=0, n_estimators=100)
+    regr3.fit(train_X, train_y)
+    prediction4 = regr3.predict(test_X)
+
+    st.write(prediction4)
+    st.write(np.mean((prediction4 - test_y) ** 2))
+
+    res4 = pd.DataFrame({'actual': test_y,
+                         'prediction': prediction4,
+                         'diff': (test_y - prediction4)})
+
+    st.write(res4)
+
+    st.write("USING MAX DEPTH OF 10")
     st.write(prediction2)
     st.write(np.mean((prediction2 - test_y) ** 2))
 
@@ -64,3 +79,17 @@ def main():
                         'diff': (test_y - prediction2)})
 
     st.write(res2)
+
+    st.write("USING MAX DEPTH OF 50")
+    regr2 = RandomForestRegressor(max_depth=50, random_state=0, n_estimators=100)
+    regr2.fit(train_X, train_y)
+    prediction3 = regr2.predict(test_X)
+
+    st.write(prediction3)
+    st.write(np.mean((prediction3 - test_y) ** 2))
+
+    res3 = pd.DataFrame({'actual': test_y,
+                         'prediction': prediction3,
+                         'diff': (test_y - prediction3)})
+
+    st.write(res3)
