@@ -9,10 +9,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.tree import DecisionTreeRegressor
 
 from sklearn import preprocessing
-
-from sklearn.ensemble import RandomForestRegressor
 
 def main():
     weather_df = pd.read_csv('heathrow_data_removed_nulls.csv')
@@ -52,11 +52,9 @@ def main():
     st.write(res)
 
     st.write("RANDOM FOREST")
-    regr = RandomForestRegressor(max_depth=10, random_state=0, n_estimators=100)
-    regr.fit(train_X, train_y)
-    prediction2 = regr.predict(test_X)
 
     st.write("USING MAX DEPTH OF 5")
+
     regr3 = RandomForestRegressor(max_depth=5, random_state=0, n_estimators=100)
     regr3.fit(train_X, train_y)
     prediction4 = regr3.predict(test_X)
@@ -71,6 +69,11 @@ def main():
     st.write(res4)
 
     st.write("USING MAX DEPTH OF 10")
+
+    regr = RandomForestRegressor(max_depth=10, random_state=0, n_estimators=100)
+    regr.fit(train_X, train_y)
+    prediction2 = regr.predict(test_X)
+
     st.write(prediction2)
     st.write(np.mean((prediction2 - test_y) ** 2))
 
@@ -93,3 +96,7 @@ def main():
                          'diff': (test_y - prediction3)})
 
     st.write(res3)
+
+    st.write("DECISION TREE REGRESSOR")
+    regressor = DecisionTreeRegressor(random_state=0)
+    regressor.fit(train_X, train_y)
