@@ -36,6 +36,8 @@ def main():
 
     train_X,test_X,train_y,test_y = train_test_split(weather_X, weather_y, test_size=0.2, random_state=4)
 
+    ###############################################################################################
+
     st.write("LINEAR REGRESSION")
     model = LinearRegression()
     model.fit(train_X, train_y)
@@ -50,6 +52,8 @@ def main():
                         'diff': (test_y - pred_linear)})
 
     st.write(res)
+
+    ###############################################################################################
 
     st.write("RANDOM FOREST")
 
@@ -68,6 +72,8 @@ def main():
 
     st.write(res_depth_5)
 
+    ###############################################################################################
+
     st.write("USING MAX DEPTH OF 10")
 
     regr_RF_depth_10 = RandomForestRegressor(max_depth=10, random_state=0, n_estimators=100)
@@ -83,6 +89,8 @@ def main():
 
     st.write(res_depth_10)
 
+    ###############################################################################################
+
     st.write("USING MAX DEPTH OF 50")
     regr_RF_depth_50 = RandomForestRegressor(max_depth=50, random_state=0, n_estimators=100)
     regr_RF_depth_50.fit(train_X, train_y)
@@ -97,6 +105,17 @@ def main():
 
     st.write(res_depth_50)
 
+    ###############################################################################################
+
     st.write("DECISION TREE REGRESSOR")
     regressor_DT = DecisionTreeRegressor(random_state=0)
     regressor_DT.fit(train_X, train_y)
+
+    pred_DT = regressor_DT.predict(test_X)
+    st.write(np.mean((pred_DT - test_y) ** 2))
+
+    res_DT = pd.DataFrame({'actual': test_y,
+                                 'pred_RF': pred_DT,
+                                 'diff': (test_y - pred_DT)})
+
+    st.write(res_DT)
