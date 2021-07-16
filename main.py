@@ -1,5 +1,6 @@
 import ukcovidstats
 import ukgdp
+import heathrow_weather
 import pakistancovid
 import engmeantemp
 import ukgvaavg
@@ -35,11 +36,13 @@ def menu_login():
             if username == "admin" and checkpw.checkpass(password):
                 st.success(f"Logged in as {username}")
 
-                task = st.selectbox("Options", ["UK Covid statistics", "UK GDP", "UK Gross Value Added", "England Mean Temp", "Pakistan Covid Profile"])
+                task = st.selectbox("Options", ["UK Covid statistics", "UK GDP", "Heathrow Weather", "UK Gross Value Added", "England Mean Temp", "Pakistan Covid Profile"])
                 if task == "UK Covid statistics":
                     ukcovidstats.main()
                 if task == "UK GDP":
                     ukgdp.main()
+                if task == "Heathrow Weather":
+                    heathrow_weather.main()
                 if task == "UK Gross Value Added":
                     ukgvaavg.main()
                 if task == "England Mean Temp":
