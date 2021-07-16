@@ -40,14 +40,14 @@ def main():
     model = LinearRegression()
     model.fit(train_X, train_y)
 
-    prediction = model.predict(test_X)
-    st.write(prediction)
+    pred_linear = model.predict(test_X)
+    st.write(pred_linear)
 
-    st.write(np.mean((prediction-test_y)**2))
+    st.write(np.mean((pred_linear-test_y)**2))
 
     res = pd.DataFrame({'actual': test_y,
-                        'prediction' : prediction,
-                        'diff': (test_y - prediction)})
+                        'pred_linear' : pred_linear,
+                        'diff': (test_y - pred_linear)})
 
     st.write(res)
 
@@ -55,48 +55,48 @@ def main():
 
     st.write("USING MAX DEPTH OF 5")
 
-    regr3 = RandomForestRegressor(max_depth=5, random_state=0, n_estimators=100)
-    regr3.fit(train_X, train_y)
-    prediction4 = regr3.predict(test_X)
+    regr_RF_depth_5 = RandomForestRegressor(max_depth=5, random_state=0, n_estimators=100)
+    regr_RF_depth_5.fit(train_X, train_y)
+    pred_RF_depth_5 = regr_RF_depth_5.predict(test_X)
 
-    st.write(prediction4)
-    st.write(np.mean((prediction4 - test_y) ** 2))
+    st.write(pred_RF_depth_5)
+    st.write(np.mean((pred_RF_depth_5 - test_y) ** 2))
 
-    res4 = pd.DataFrame({'actual': test_y,
-                         'prediction': prediction4,
-                         'diff': (test_y - prediction4)})
+    res_depth_5 = pd.DataFrame({'actual': test_y,
+                         'pred_RF': pred_RF_depth_5,
+                         'diff': (test_y - pred_RF_depth_5)})
 
-    st.write(res4)
+    st.write(res_depth_5)
 
     st.write("USING MAX DEPTH OF 10")
 
-    regr = RandomForestRegressor(max_depth=10, random_state=0, n_estimators=100)
-    regr.fit(train_X, train_y)
-    prediction2 = regr.predict(test_X)
+    regr_RF_depth_10 = RandomForestRegressor(max_depth=10, random_state=0, n_estimators=100)
+    regr_RF_depth_10.fit(train_X, train_y)
+    pred_RF_depth_10 = regr_RF_depth_10.predict(test_X)
 
-    st.write(prediction2)
-    st.write(np.mean((prediction2 - test_y) ** 2))
+    st.write(pred_RF_depth_10)
+    st.write(np.mean((pred_RF_depth_10 - test_y) ** 2))
 
-    res2 = pd.DataFrame({'actual': test_y,
-                        'prediction': prediction2,
-                        'diff': (test_y - prediction2)})
+    res_depth_10 = pd.DataFrame({'actual': test_y,
+                        'pred_RF': pred_RF_depth_10,
+                        'diff': (test_y - pred_RF_depth_10)})
 
-    st.write(res2)
+    st.write(res_depth_10)
 
     st.write("USING MAX DEPTH OF 50")
-    regr2 = RandomForestRegressor(max_depth=50, random_state=0, n_estimators=100)
-    regr2.fit(train_X, train_y)
-    prediction3 = regr2.predict(test_X)
+    regr_RF_depth_50 = RandomForestRegressor(max_depth=50, random_state=0, n_estimators=100)
+    regr_RF_depth_50.fit(train_X, train_y)
+    pred_RF_depth_50 = regr_RF_depth_50.predict(test_X)
 
-    st.write(prediction3)
-    st.write(np.mean((prediction3 - test_y) ** 2))
+    st.write(pred_RF_depth_50)
+    st.write(np.mean((pred_RF_depth_50 - test_y) ** 2))
 
-    res3 = pd.DataFrame({'actual': test_y,
-                         'prediction': prediction3,
-                         'diff': (test_y - prediction3)})
+    res_depth_50 = pd.DataFrame({'actual': test_y,
+                         'pred_RF': pred_RF_depth_50,
+                         'diff': (test_y - pred_RF_depth_50)})
 
-    st.write(res3)
+    st.write(res_depth_50)
 
     st.write("DECISION TREE REGRESSOR")
-    regressor = DecisionTreeRegressor(random_state=0)
-    regressor.fit(train_X, train_y)
+    regressor_DT = DecisionTreeRegressor(random_state=0)
+    regressor_DT.fit(train_X, train_y)
