@@ -15,13 +15,6 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.tree import DecisionTreeClassifier
-
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import roc_curve
-from sklearn.metrics import roc_auc_score
-
-from sklearn import preprocessing
 
 global train_X,test_X,train_y,test_y
 
@@ -48,7 +41,8 @@ def main():
     train_X,test_X,train_y,test_y = train_test_split(weather_X, weather_y, test_size=0.2, random_state=4)
 
     #Choose ML Method
-    st.write("Please choose a method of Machine Learning:")
+    st.write("Please choose a method of Machine Learning*:")
+    st.write("*(Polynomial Regression takes a while to run)")
     task = st.selectbox("ML Methods", ["LINEAR REGRESSION", "RANDOM FOREST", "DECISION TREE REGRESSOR", "POLYNOMIAL REGRESSION"])
     if task == "LINEAR REGRESSION":
         linear(train_X,test_X,train_y,test_y)
@@ -56,7 +50,7 @@ def main():
         rand(train_X,test_X,train_y,test_y)
     if task == "DECISION TREE REGRESSOR":
         desc(train_X,test_X,train_y,test_y)
-    if task == "POLYNOMIAL REGRESSION (takes long to run)":
+    if task == "POLYNOMIAL REGRESSION":
         poly(train_X, test_X, train_y, test_y)
 
     #else:
@@ -73,7 +67,18 @@ def linear(train_X,test_X,train_y,test_y):
     # st.write(pred_linear)
 
     err = np.mean((pred_linear - test_y) ** 2)
-    st.write(f"Error rate: {err}")
+    out_err = ("{0:.3%}".format(err))
+    st.write(f"Error rate: {out_err}")
+
+    """
+    plt.figure(figsize=(4,3))
+    plt.scatter(test_y, pred_linear)
+    plt.plot([0, 100], [0, 100], '--k')
+    plt.axis('tight')
+    plt.xlabel('True')
+    plt.ylabel('Predicted')
+    plt.tight_layout()
+    """
 
     res = pd.DataFrame({'actual': test_y,
                         'pred_linear': pred_linear,
@@ -81,12 +86,9 @@ def linear(train_X,test_X,train_y,test_y):
 
     # st.write(res)
 
-    # user_input = 0
-
-    # classification_linear = model.predict(user_input)
     user_input_given = getinput.get_heathrow_input()
     user_pred = model.predict(user_input_given)
-    st.write(f"Predicted Max Temperature for given inputs: {user_pred}")
+    st.write(f"Predicted Max Temperature for given inputs (degrees C): {user_pred}")
 
 ###############################################################################################
 
@@ -111,7 +113,8 @@ def rand_5(train_X,test_X,train_y,test_y):
 
     # st.write(pred_RF_depth_5)
     err_5 = np.mean((pred_RF_depth_5 - test_y) ** 2)
-    st.write(f"Error rate: {err_5}")
+    out_err_5 = ("{0:.3%}".format(err_5))
+    st.write(f"Error rate: {out_err_5}")
 
     res_depth_5 = pd.DataFrame({'actual': test_y,
                                 'pred_RF': pred_RF_depth_5,
@@ -121,7 +124,7 @@ def rand_5(train_X,test_X,train_y,test_y):
 
     user_input_given = getinput.get_heathrow_input()
     user_pred = regr_RF_depth_5.predict(user_input_given)
-    st.write(f"Predicted Max Temperature for given inputs: {user_pred}")
+    st.write(f"Predicted Max Temperature for given inputs (degrees C): {user_pred}")
 
 def rand_10(train_X,test_X,train_y,test_y):
     st.write("USING MAX DEPTH OF 10")
@@ -132,7 +135,8 @@ def rand_10(train_X,test_X,train_y,test_y):
 
     # st.write(pred_RF_depth_10)
     err_10 = np.mean((pred_RF_depth_10 - test_y) ** 2)
-    st.write(f"Error rate: {err_10}")
+    out_err_10 = ("{0:.3%}".format(err_10))
+    st.write(f"Error rate: {out_err_10}")
 
     res_depth_10 = pd.DataFrame({'actual': test_y,
                                  'pred_RF': pred_RF_depth_10,
@@ -141,7 +145,7 @@ def rand_10(train_X,test_X,train_y,test_y):
     # st.write(res_depth_10)
     user_input_given = getinput.get_heathrow_input()
     user_pred = regr_RF_depth_10.predict(user_input_given)
-    st.write(f"Predicted Max Temperature for given inputs: {user_pred}")
+    st.write(f"Predicted Max Temperature for given inputs (degrees C): {user_pred}")
 
 def rand_50(train_X,test_X,train_y,test_y):
     st.write("USING MAX DEPTH OF 50")
@@ -151,7 +155,8 @@ def rand_50(train_X,test_X,train_y,test_y):
 
     # st.write(pred_RF_depth_50)
     err_50 = np.mean((pred_RF_depth_50 - test_y) ** 2)
-    st.write(f"Error rate: {err_50}")
+    out_err_50 = ("{0:.3%}".format(err_50))
+    st.write(f"Error rate: {out_err_50}")
 
     res_depth_50 = pd.DataFrame({'actual': test_y,
                                  'pred_RF': pred_RF_depth_50,
@@ -160,7 +165,7 @@ def rand_50(train_X,test_X,train_y,test_y):
     # st.write(res_depth_50)
     user_input_given = getinput.get_heathrow_input()
     user_pred = regr_RF_depth_50.predict(user_input_given)
-    st.write(f"Predicted Max Temperature for given inputs: {user_pred}")
+    st.write(f"Predicted Max Temperature for given inputs (degrees C): {user_pred}")
 
 ###############################################################################################
 
@@ -171,7 +176,8 @@ def desc(train_X,test_X,train_y,test_y):
 
     pred_DT = regressor_DT.predict(test_X)
     err = np.mean((pred_DT - test_y) ** 2)
-    st.write(f"Error rate: {err}")
+    out_err = ("{0:.3%}".format(err))
+    st.write(f"Error rate: {out_err}")
 
     res_DT = pd.DataFrame({'actual': test_y,
                            'pred_RF': pred_DT,
@@ -180,7 +186,9 @@ def desc(train_X,test_X,train_y,test_y):
     # st.write(res_DT)
     user_input_given = getinput.get_heathrow_input()
     user_pred = regressor_DT.predict(user_input_given)
-    st.write(f"Predicted Max Temperature for given inputs: {user_pred}")
+    st.write(f"Predicted Max Temperature for given inputs (degrees C): {user_pred}")
+
+
 
 ###############################################################################################
 
@@ -194,8 +202,9 @@ def poly(train_X,test_X,train_y,test_y):
 
     pred = linear2.predict(poly.fit_transform(test_X))
     err = np.mean((pred-test_y)**2)
-    (st.write(f"Error rate: {err}"))
+    out_err = ("{0:.3%}".format(err))
+    st.write(f"Error rate: {out_err}")
 
     user_input_given = getinput.get_heathrow_input()
     user_pred = linear2.predict(poly.fit_transform(user_input_given))
-    st.write(f"Predicted Max Temperature for given inputs: {user_pred}")
+    st.write(f"Predicted Max Temperature for given inputs (degrees C): {user_pred}")
