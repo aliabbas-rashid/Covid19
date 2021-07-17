@@ -14,6 +14,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
+from sklearn.preprocessing import PolynomialFeatures
 from sklearn.tree import DecisionTreeClassifier
 
 from sklearn.metrics import confusion_matrix
@@ -48,13 +49,16 @@ def main():
 
     #Choose ML Method
     st.write("Please choose a method of Machine Learning:")
-    task = st.selectbox("ML Methods", ["LINEAR REGRESSION", "RANDOM FOREST", "DECISION TREE REGRESSOR"])
+    task = st.selectbox("ML Methods", ["LINEAR REGRESSION", "RANDOM FOREST", "DECISION TREE REGRESSOR", "POLYNOMIAL REGRESSION"])
     if task == "LINEAR REGRESSION":
         linear(train_X,test_X,train_y,test_y)
     if task == "RANDOM FOREST":
         rand(train_X,test_X,train_y,test_y)
     if task == "DECISION TREE REGRESSOR":
         desc(train_X,test_X,train_y,test_y)
+    if task == "POLYNOMIAL REGRESSION (takes long to run)":
+        poly(train_X, test_X, train_y, test_y)
+
     #else:
         #st.warning("PLEASE SELECT A MACHINE LEARNING METHOD")
 
@@ -176,4 +180,22 @@ def desc(train_X,test_X,train_y,test_y):
     # st.write(res_DT)
     user_input_given = getinput.get_heathrow_input()
     user_pred = regressor_DT.predict(user_input_given)
+    st.write(f"Predicted Max Temperature for given inputs: {user_pred}")
+
+###############################################################################################
+
+def poly(train_X,test_X,train_y,test_y):
+    poly = PolynomialFeatures(degree=4)
+    X_poly = poly.fit_transform(train_X)
+
+    poly.fit(X_poly, train_y)
+    linear2 = LinearRegression()
+    linear2.fit(X_poly, train_y)
+
+    pred = linear2.predict(poly.fit_transform(test_X))
+    acc = np.mean((pred-test_y)**2)
+    (st.write(f"Accuracy: {acc}"))
+
+    user_input_given = getinput.get_heathrow_input()
+    user_pred = linear2.predict(poly.fit_transform(user_input_given))
     st.write(f"Predicted Max Temperature for given inputs: {user_pred}")
