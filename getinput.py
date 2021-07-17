@@ -138,3 +138,37 @@ def datetime_to_float(d):
 
 def float_to_datetime(fl):
     return datetime.datetime.fromtimestamp(fl)
+
+def get_heathrow_input():
+    st.sidebar.write("Inputs for machine learning:")
+    st.sidebar.write("___")
+    st.sidebar.write("Formatting:")
+    st.sidebar.write("Year = YYYY")
+    st.sidebar.write("Month = M (1-12)")
+    st.sidebar.write("Temperature Min = INT")
+    st.sidebar.write("Air Frost Days = INT")
+    st.sidebar.write("Rain (mm) = INT")
+    st.sidebar.write("Sunshine (hours) = INT")
+    st.sidebar.write("___")
+    year = st.sidebar.slider("Year", 1948, 2030, 1989)
+    month = st.sidebar.slider("Month", 1, 12, 6)
+    tmin = st.sidebar.slider("Temperature (minimum, rounded):", -5, 20, 8)
+    af = st.sidebar.slider("Air Frost Days", 0, 31, 16)
+    rain = st.sidebar.slider("Rainfall (mm, rounded):", 0, 200, 100)
+    sun = st.sidebar.slider("Sunshine (hours, rounded)", 0, 350, 175)
+    user_data = {'yyyy' : year,
+                 'mm' : month,
+                 'tmin' : tmin,
+                 'af' : af,
+                 'rain' : rain,
+                 'sun' : sun}
+
+    features = pd.DataFrame(user_data, index=[0])
+
+    features.loc[features['rain']>=40, 'Recip Type'] = 1
+    features.loc[features['rain'] < 40, 'Recip Type'] = 0
+
+    features.loc[features['sun'] >= 60, 'Sun Type'] = 1
+    features.loc[features['sun'] < 60, 'Sun Type'] = 0
+
+    return features
