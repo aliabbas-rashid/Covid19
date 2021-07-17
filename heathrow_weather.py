@@ -72,8 +72,8 @@ def linear(train_X,test_X,train_y,test_y):
     pred_linear = model.predict(test_X)
     # st.write(pred_linear)
 
-    acc = np.mean((pred_linear - test_y) ** 2)
-    st.write(f"Accuracy: {acc}")
+    err = np.mean((pred_linear - test_y) ** 2)
+    st.write(f"Error rate: {err}")
 
     res = pd.DataFrame({'actual': test_y,
                         'pred_linear': pred_linear,
@@ -110,8 +110,8 @@ def rand_5(train_X,test_X,train_y,test_y):
     pred_RF_depth_5 = regr_RF_depth_5.predict(test_X)
 
     # st.write(pred_RF_depth_5)
-    acc_5 = np.mean((pred_RF_depth_5 - test_y) ** 2)
-    st.write(f"Accuracy: {acc_5}")
+    err_5 = np.mean((pred_RF_depth_5 - test_y) ** 2)
+    st.write(f"Error rate: {err_5}")
 
     res_depth_5 = pd.DataFrame({'actual': test_y,
                                 'pred_RF': pred_RF_depth_5,
@@ -131,8 +131,8 @@ def rand_10(train_X,test_X,train_y,test_y):
     pred_RF_depth_10 = regr_RF_depth_10.predict(test_X)
 
     # st.write(pred_RF_depth_10)
-    acc_10 = np.mean((pred_RF_depth_10 - test_y) ** 2)
-    st.write(f"Accuracy: {acc_10}")
+    err_10 = np.mean((pred_RF_depth_10 - test_y) ** 2)
+    st.write(f"Error rate: {err_10}")
 
     res_depth_10 = pd.DataFrame({'actual': test_y,
                                  'pred_RF': pred_RF_depth_10,
@@ -150,8 +150,8 @@ def rand_50(train_X,test_X,train_y,test_y):
     pred_RF_depth_50 = regr_RF_depth_50.predict(test_X)
 
     # st.write(pred_RF_depth_50)
-    acc_50 = np.mean((pred_RF_depth_50 - test_y) ** 2)
-    st.write(f"Accuracy: {acc_50}")
+    err_50 = np.mean((pred_RF_depth_50 - test_y) ** 2)
+    st.write(f"Error rate: {err_50}")
 
     res_depth_50 = pd.DataFrame({'actual': test_y,
                                  'pred_RF': pred_RF_depth_50,
@@ -170,8 +170,8 @@ def desc(train_X,test_X,train_y,test_y):
     regressor_DT.fit(train_X, train_y)
 
     pred_DT = regressor_DT.predict(test_X)
-    acc = np.mean((pred_DT - test_y) ** 2)
-    st.write(f"Accuracy: {acc}")
+    err = np.mean((pred_DT - test_y) ** 2)
+    st.write(f"Error rate: {err}")
 
     res_DT = pd.DataFrame({'actual': test_y,
                            'pred_RF': pred_DT,
@@ -193,8 +193,8 @@ def poly(train_X,test_X,train_y,test_y):
     linear2.fit(X_poly, train_y)
 
     pred = linear2.predict(poly.fit_transform(test_X))
-    acc = np.mean((pred-test_y)**2)
-    (st.write(f"Accuracy: {acc}"))
+    err = np.mean((pred-test_y)**2)
+    (st.write(f"Error rate: {err}"))
 
     user_input_given = getinput.get_heathrow_input()
     user_pred = linear2.predict(poly.fit_transform(user_input_given))
