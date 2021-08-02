@@ -28,8 +28,8 @@ def main():
 
     #st.write(round(100*(weather_df.isnull().sum()/len(weather_df.index)),2))
 
-    weather_df.loc[weather_df['rain']>=40, 'Recip Type'] = 1
-    weather_df.loc[weather_df['rain'] < 40, 'Recip Type'] = 0
+    weather_df.loc[weather_df['rain']>=40, 'Precip Type'] = 1
+    weather_df.loc[weather_df['rain'] < 40, 'Precip Type'] = 0
 
     weather_df.loc[weather_df['sun'] >= 60, 'Sun Type'] = 1
     weather_df.loc[weather_df['sun'] < 60, 'Sun Type'] = 0
@@ -65,7 +65,7 @@ def linear(train_X,test_X,train_y,test_y):
     model.fit(train_X, train_y)
 
     pred_linear = model.predict(test_X)
-    # st.write(pred_linear)
+    st.write(pred_linear)
 
     err = np.mean((pred_linear - test_y) ** 2)
     out_err = ("{0:.3%}".format(err))
@@ -85,7 +85,7 @@ def linear(train_X,test_X,train_y,test_y):
                         'pred_linear': pred_linear,
                         'diff': (test_y - pred_linear)})
 
-    # st.write(res)
+    st.write(res)
 
     user_input_given = getinput.get_heathrow_input()
     user_pred = model.predict(user_input_given)
