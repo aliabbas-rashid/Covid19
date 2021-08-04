@@ -66,7 +66,7 @@ def main(df):
     gdp_train = indexedDataset.iloc[0:126]
     gdp_test = indexedDataset.iloc[126:]
 
-    gdp_model = ARIMA(gdp_train.astype(int), order=(4, 1, 18))
+    gdp_model = ARIMA(gdp_train.astype(int), order=(4, 1, 17))
     gdp_model_fit = gdp_model.fit(transparams=False)
 
 

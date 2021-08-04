@@ -15,7 +15,12 @@ from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import PolynomialFeatures
+
+from sklearn.metrics import r2_score
+from sklearn.metrics import max_error
+from sklearn.metrics import explained_variance_score
 
 global train_X,test_X,train_y,test_y
 
@@ -91,6 +96,14 @@ def linear(train_X,test_X,train_y,test_y):
     user_pred = model.predict(user_input_given)
     st.write(f"Predicted Max Temperature for given inputs (degrees C): {user_pred}")
 
+    r2_score_linear = r2_score(test_y, pred_linear)
+    st.write(f"r2 score: {r2_score_linear}")
+
+    max_error_linear = max_error(test_y, pred_linear)
+    st.write(f"max error: {max_error_linear}")
+
+    explained_variance_score_linear = explained_variance_score(test_y, pred_linear, multioutput='uniform_average')
+    st.write(f"explained variance score: {explained_variance_score_linear}")
 ###############################################################################################
 
 def rand(train_X,test_X,train_y,test_y):
@@ -127,6 +140,15 @@ def rand_5(train_X,test_X,train_y,test_y):
     user_pred = regr_RF_depth_5.predict(user_input_given)
     st.write(f"Predicted Max Temperature for given inputs (degrees C): {user_pred}")
 
+    r2_score_RF_depth_5 = r2_score(test_y, pred_RF_depth_5)
+    st.write(f"r2 score: {r2_score_RF_depth_5}")
+
+    max_error_RF_depth_5 = max_error(test_y, pred_RF_depth_5)
+    st.write(f"max error: {max_error_RF_depth_5}")
+
+    explained_variance_score_RF_depth_5 = explained_variance_score(test_y, pred_RF_depth_5, multioutput='uniform_average')
+    st.write(f"explained variance score: {explained_variance_score_RF_depth_5}")
+
 def rand_10(train_X,test_X,train_y,test_y):
     st.write("USING MAX DEPTH OF 10")
 
@@ -148,6 +170,15 @@ def rand_10(train_X,test_X,train_y,test_y):
     user_pred = regr_RF_depth_10.predict(user_input_given)
     st.write(f"Predicted Max Temperature for given inputs (degrees C): {user_pred}")
 
+    r2_score_RF_depth_10 = r2_score(test_y, pred_RF_depth_10)
+    st.write(f"r2 score: {r2_score_RF_depth_10}")
+
+    max_error_RF_depth_10 = max_error(test_y, pred_RF_depth_10)
+    st.write(f"max error: {max_error_RF_depth_10}")
+
+    explained_variance_score_RF_depth_10 = explained_variance_score(test_y, pred_RF_depth_10, multioutput='uniform_average')
+    st.write(f"explained variance score: {explained_variance_score_RF_depth_10}")
+
 def rand_50(train_X,test_X,train_y,test_y):
     st.write("USING MAX DEPTH OF 50")
     regr_RF_depth_50 = RandomForestRegressor(max_depth=50, random_state=0, n_estimators=100)
@@ -167,6 +198,15 @@ def rand_50(train_X,test_X,train_y,test_y):
     user_input_given = getinput.get_heathrow_input()
     user_pred = regr_RF_depth_50.predict(user_input_given)
     st.write(f"Predicted Max Temperature for given inputs (degrees C): {user_pred}")
+
+    r2_score_RF_depth_50 = r2_score(test_y, pred_RF_depth_50)
+    st.write(f"r2 score: {r2_score_RF_depth_50}")
+
+    max_error_RF_depth_50 = max_error(test_y, pred_RF_depth_50)
+    st.write(f"max error: {max_error_RF_depth_50}")
+
+    explained_variance_score_RF_depth_50 = explained_variance_score(test_y, pred_RF_depth_50, multioutput='uniform_average')
+    st.write(f"explained variance score: {explained_variance_score_RF_depth_50}")
 
 ###############################################################################################
 
@@ -189,6 +229,14 @@ def desc(train_X,test_X,train_y,test_y):
     user_pred = regressor_DT.predict(user_input_given)
     st.write(f"Predicted Max Temperature for given inputs (degrees C): {user_pred}")
 
+    r2_score_DT = r2_score(test_y, pred_DT)
+    st.write(f"r2 score: {r2_score_DT}")
+
+    max_error_DT = max_error(test_y, pred_DT)
+    st.write(f"max error: {max_error_DT}")
+
+    explained_variance_score_DT = explained_variance_score(test_y, pred_DT, multioutput='uniform_average')
+    st.write(f"explained variance score: {explained_variance_score_DT}")
 
 
 ###############################################################################################
