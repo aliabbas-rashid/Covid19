@@ -21,6 +21,7 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.metrics import r2_score
 from sklearn.metrics import max_error
 from sklearn.metrics import explained_variance_score
+from sklearn.metrics import mean_squared_error
 
 global train_X,test_X,train_y,test_y
 
@@ -104,6 +105,9 @@ def linear(train_X,test_X,train_y,test_y):
 
     explained_variance_score_linear = explained_variance_score(test_y, pred_linear, multioutput='uniform_average')
     st.write(f"explained variance score: {explained_variance_score_linear}")
+
+    rmse_linear = mean_squared_error(test_y, pred_linear, squared=False)
+    st.write(f"root means squared error: {rmse_linear}")
 ###############################################################################################
 
 def rand(train_X,test_X,train_y,test_y):
@@ -149,6 +153,9 @@ def rand_5(train_X,test_X,train_y,test_y):
     explained_variance_score_RF_depth_5 = explained_variance_score(test_y, pred_RF_depth_5, multioutput='uniform_average')
     st.write(f"explained variance score: {explained_variance_score_RF_depth_5}")
 
+    rmse_RF_depth_5 = mean_squared_error(test_y, pred_RF_depth_5, squared=False)
+    st.write(f"root means squared error: {rmse_RF_depth_5}")
+
 def rand_10(train_X,test_X,train_y,test_y):
     st.write("USING MAX DEPTH OF 10")
 
@@ -179,6 +186,9 @@ def rand_10(train_X,test_X,train_y,test_y):
     explained_variance_score_RF_depth_10 = explained_variance_score(test_y, pred_RF_depth_10, multioutput='uniform_average')
     st.write(f"explained variance score: {explained_variance_score_RF_depth_10}")
 
+    rmse_RF_depth_10 = mean_squared_error(test_y, pred_RF_depth_10, squared=False)
+    st.write(f"root means squared error: {rmse_RF_depth_10}")
+
 def rand_50(train_X,test_X,train_y,test_y):
     st.write("USING MAX DEPTH OF 50")
     regr_RF_depth_50 = RandomForestRegressor(max_depth=50, random_state=0, n_estimators=100)
@@ -207,6 +217,9 @@ def rand_50(train_X,test_X,train_y,test_y):
 
     explained_variance_score_RF_depth_50 = explained_variance_score(test_y, pred_RF_depth_50, multioutput='uniform_average')
     st.write(f"explained variance score: {explained_variance_score_RF_depth_50}")
+
+    rmse_RF_depth_50 = mean_squared_error(test_y, pred_RF_depth_50, squared=False)
+    st.write(f"root means squared error: {rmse_RF_depth_50}")
 
 ###############################################################################################
 
@@ -238,6 +251,8 @@ def desc(train_X,test_X,train_y,test_y):
     explained_variance_score_DT = explained_variance_score(test_y, pred_DT, multioutput='uniform_average')
     st.write(f"explained variance score: {explained_variance_score_DT}")
 
+    rmse_DT = mean_squared_error(test_y, pred_DT, squared=False)
+    st.write(f"root means squared error: {rmse_DT}")
 
 ###############################################################################################
 
