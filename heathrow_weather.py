@@ -77,16 +77,6 @@ def linear(train_X,test_X,train_y,test_y):
     out_err = ("{0:.3%}".format(err))
     st.write(f"Error rate: {out_err}")
 
-    """
-    plt.figure(figsize=(4,3))
-    plt.scatter(test_y, pred_linear)
-    plt.plot([0, 100], [0, 100], '--k')
-    plt.axis('tight')
-    plt.xlabel('True')
-    plt.ylabel('Predicted')
-    plt.tight_layout()
-    """
-
     res = pd.DataFrame({'actual': test_y,
                         'pred_linear': pred_linear,
                         'diff': (test_y - pred_linear)})
@@ -108,6 +98,7 @@ def linear(train_X,test_X,train_y,test_y):
 
     rmse_linear = mean_squared_error(test_y, pred_linear, squared=False)
     st.write(f"root means squared error: {rmse_linear}")
+
 ###############################################################################################
 
 def rand(train_X,test_X,train_y,test_y):
