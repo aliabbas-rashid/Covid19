@@ -71,7 +71,7 @@ def linear(train_X,test_X,train_y,test_y):
     model.fit(train_X, train_y)
 
     pred_linear = model.predict(test_X)
-    st.write(pred_linear)
+    #st.write(pred_linear)
 
     err = np.mean((pred_linear - test_y) ** 2)
     out_err = ("{0:.3%}".format(err))
@@ -81,7 +81,7 @@ def linear(train_X,test_X,train_y,test_y):
                         'pred_linear': pred_linear,
                         'diff': (test_y - pred_linear)})
 
-    st.write(res)
+    #st.write(res)
 
     user_input_given = getinput.get_heathrow_input()
     user_pred = model.predict(user_input_given)
